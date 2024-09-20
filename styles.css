@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
 
 :root {
-    --primary-color: #008080; /* Teal (deeper turquoise) */
-    --secondary-color: #006666; /* Darker teal */
-    --accent-color: #00A9A9; /* Slightly lighter teal for accents */
+    --primary-color: #20B2AA; /* Light Sea Green (turquoise) */
+    --secondary-color: #2F4F4F; /* Dark Slate Gray */
+    --accent-color: #00CED1; /* Dark Turquoise */
     --background-color: #F0FFFF; /* Azure */
     --text-color: #333333;
 }
