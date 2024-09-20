@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
 
 :root {
-/*     --primary-color: #20B2AA; /* Light Sea Green (turquoise) */ */
-    --primary-color: #004046;
+    --primary-color: #20B2AA; /* Light Sea Green (turquoise) */
     --secondary-color: #2F4F4F; /* Dark Slate Gray */
     --accent-color: #00CED1; /* Dark Turquoise */
     --background-color: #F0FFFF; /* Azure */
-/*     --background-color: #004046; */
     --text-color: #333333;
 }
 
