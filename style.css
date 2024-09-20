@@ -87,3 +87,30 @@ footer {
         margin: 0.5rem 0;
     }
 }
+
+/* Styles for introduction.html */
+main section {
+    margin-bottom: 2rem;
+}
+
+main h3 {
+    color: #2c5282;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.intro-image {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#research-questions ol {
+    padding-left: 1.5rem;
+}
+
+#research-questions li {
+    margin-bottom: 0.5rem;
+}
