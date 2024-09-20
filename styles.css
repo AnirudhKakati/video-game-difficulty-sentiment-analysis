@@ -200,3 +200,70 @@ footer {
         margin-bottom: 1rem;
     }
 }
+
+/* Styles for team.html */
+.team-member {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.team-member-image {
+    width: 200px;
+    flex-shrink: 0;
+    margin-right: 2rem;
+}
+
+.team-member img {
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+}
+
+.team-member-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+}
+
+.team-member-info h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.social-links {
+    margin-top: auto;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 1rem;
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .team-member {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .team-member-image {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .team-member-info {
+        min-height: auto;
+    }
+}
