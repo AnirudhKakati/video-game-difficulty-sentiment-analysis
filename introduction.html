@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction - Player Sentiment Analysis</title>
-    <link rel="stylesheet" href="elden-ring-style.css">
+    <title>Introduction - Player Sentiment Analysis in Video Games</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="background-image" style="background-image: url('images/background2.jpg');"></div>
     <header>
         <h1>Player Sentiment Analysis in Video Games</h1>
         <nav>
@@ -21,7 +20,8 @@
             </ul>
         </nav>
     </header>
-    <main class="fade-scroll">
+    
+    <main>
         <h2>Introduction</h2>
         
         <section id="topic-overview">
@@ -84,19 +84,6 @@
     <footer>
         <p>2024 Video Game Sentiment Analysis Team</p>
     </footer>
-    <script>
-    window.addEventListener('scroll', function() {
-        var scrollPosition = window.pageYOffset;
-        var fadeElements = document.querySelectorAll('.fade-scroll');
-        fadeElements.forEach(function(element) {
-            var elementPosition = element.offsetTop;
-            var distance = elementPosition - scrollPosition;
-            var opacity = 1 - (scrollPosition / 1000);
-            var scale = 1 - (scrollPosition / 5000);
-            element.style.opacity = opacity > 0 ? opacity : 0;
-            element.style.transform = `scale(${scale > 0.5 ? scale : 0.5})`;
-        });
-    });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
