@@ -4,10 +4,10 @@
     --primary-color: #d4af37; /* Gold */
     --secondary-color: #000000; /* Black */
     --text-color: #f0e6d2; /* Light gold / off-white */
-/*     --heading-color: #d4af37; /* Bright gold for headings */ */
-    --heading-color: #c19b4f; /* Slightly darker gold for headings */
-/*     --subheading-color: #c19b4f; /* Slightly darker gold for subheadings */ */
-    --subheading-color: #d4af37; /* Bright gold for subheadings */
+    --heading-color: #d4af37; /* Bright gold for headings */
+/*     --heading-color: #c19b4f; /* Slightly darker gold for headings */ */
+    --subheading-color: #c19b4f; /* Slightly darker gold for subheadings */
+/*     --subheading-color: #d4af37; /* Bright gold for subheadings */ */
     --link-color: #ffd700; /* Bright gold for links */
     --background-color: rgba(0, 0, 0, 0.8);
 }
