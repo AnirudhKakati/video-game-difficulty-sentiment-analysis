@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap');
 
 :root {
-    --primary-color: #d4af37; /* Gold */
+    --primary-color: #c19b4f; /* Darker gold (main color) */
     --secondary-color: #000000; /* Black */
     --text-color: #f0e6d2; /* Light gold / off-white */
-    --heading-color: #d4af37; /* Bright gold for headings */
-    --subheading-color: #c19b4f; /* Slightly darker gold for subheadings */
+    --heading-color: #c19b4f; /* Darker gold for headings */
+    --subheading-color: #d4af37; /* Brighter gold for subheadings */
     --link-color: #ffd700; /* Bright gold for links */
     --background-color: rgba(0, 0, 0, 0.8);
 }
@@ -37,7 +37,7 @@ header {
     background-color: rgba(0, 0, 0, 0.7);
     color: var(--heading-color);
     padding: 1.5rem 0;
-    box-shadow: 0 4px 6px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 4px 6px rgba(193, 155, 79, 0.1);
 }
 
 header h1 {
@@ -81,7 +81,7 @@ main {
     margin: 3rem auto;
     padding: 3rem;
     background-color: var(--background-color);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 20px rgba(193, 155, 79, 0.2);
     border-radius: 15px;
 }
 
@@ -127,7 +127,7 @@ a:hover {
     height: auto;
     margin: 1.5rem 0;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 4px 8px rgba(193, 155, 79, 0.2);
     transition: transform 0.3s ease;
 }
 
