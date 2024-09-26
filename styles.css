@@ -60,7 +60,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: var(--link-color);
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -69,7 +69,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: var(--link-color);
+    background-color: var(--primary-color);
     color: var(--secondary-color);
     transform: translateY(-2px);
 }
@@ -119,7 +119,7 @@ a {
 }
 
 a:hover {
-    color: var(--heading-color);
+    color: var(--primary-color);
 }
 
 .intro-image {
@@ -205,6 +205,21 @@ footer {
 
 .social-links a:hover {
     color: #ffffff;
+}
+
+button, .button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover, .button:hover {
+    background-color: var(--heading-color);
+    transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
