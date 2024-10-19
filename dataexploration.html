@@ -81,63 +81,30 @@
             }
             
             .two-column-list ol {
-                width: 48%; /* Adjust as needed */
+                width: 48%;
             }
         </style>
-
+        
         <section id="data-preprocessing">
             <h3>Data Preprocessing</h3>
-            <h4>Removing Duplicates</h4>
-            <p>[Explanation and process]</p>
-
-            <h4>Handling Outliers</h4>
-            <p>[Explanation and process]</p>
-
-            <h4>Handling Missing Data</h4>
-            <p>[Explanation and process]</p>
-
-            <h4>Data Quality Check</h4>
-            <p>[Explanation and process]</p>
-        </section>
-
-        <section id="data-statistics">
-            <h3>Data Statistics</h3>
-            <p>[Include your data statistics here]</p>
-        </section>
-
-        <section id="attribute-types">
-            <h3>Attribute Types</h3>
-            <p>[Identify and explain categorical, numerical, etc. attributes]</p>
-        </section>
-
-        <section id="data-understanding">
-            <h3>Deeper Data Understanding</h3>
-            <h4>Central Tendency</h4>
-            <p>[Explanation and findings]</p>
-
-            <h4>Dispersion</h4>
-            <p>[Explanation and findings]</p>
-
-            <h4>QQ Plot</h4>
-            <p>[Explanation and plot]</p>
-        </section>
-
-        <section id="data-processing">
-            <h3>Data Processing</h3>
-            <h4>Data Similarity</h4>
-            <p>[Explanation and process]</p>
-
-            <h4>Data Integration</h4>
-            <p>[Explanation and process]</p>
-
-            <h4>Data Reduction</h4>
-            <p>[Explanation and process]</p>
-
-            <h4>Normalization</h4>
-            <p>[Explanation and process]</p>
-
-            <h4>Transformation</h4>
-            <p>[Explanation and process]</p>
+            <p>
+                Reviews from each game were stored in JSON Files. 
+                First, we compiled all JSON files into one single pandas dataframe for data preprocessing. 
+                Any duplicate or non english records were removed. 
+                A field called “author” was a dictionary, which was flattened by appending each of its keys as a separate column in the dataframe. 
+                Records without “playtime_at_review” fields were dropped. For our analysis we would only need the columns: "game_name","review","voted_up","timestamp_created","author_num_games_owned","author_num_reviews","author_playtime_at_review","author_playtime_last_two_weeks" and "author_playtime_forever".
+                Only these relevant columns were kept with others getting discarded. 
+                The "review" column was cleaned with all text being converted to lowercase for uniformity, punctuation and non alphanumeric characters were removed using regular expressions. 
+                We also filter out reviews with lack of meaningful content. We do this by first checking if the review has "valid words".
+                "Valid words" are defined to be meaningful english words. But some terms which are commonly used in gaming scenarios like "gg", "goty", "despawn", etc. are also added to our set of valid words.
+                However, we cannot manually add all words relevant to the games and there could still be words which are specific to some games and their communities like the word "elden" used in the game Elden Ring.
+                So, we add another check in our validation such that if a word, which isn't already marked valid by our inital check, appears more than 3 times across other reviews is marked as a valid words.
+                With these checks, the reviews are marked as relevant only if atleast 50% of the words are found to be valid.
+                All records with empty or irrelevant reviews after the transformations were dropped with the dataset now having close to 43000 records. 
+                The cleaned dataset is stored in a csv which looks like this:
+            </p>
+            <img src="images/cleaned_dataset.jpg" alt="Cleaned Dataset Image" class="data-image">
+            
         </section>
 
         <section id="visualizations">
@@ -151,14 +118,6 @@
             <!-- ... -->
         </section>
 
-        <section id="dataset-comparison">
-            <h3>Dataset Comparison</h3>
-            <h4>Before Data Processing</h4>
-            <p>[Include a snippet or screenshot of your dataset before processing]</p>
-
-            <h4>After Data Processing</h4>
-            <p>[Include a snippet or screenshot of your dataset after processing]</p>
-        </section>
     </main>
 
     <footer>
