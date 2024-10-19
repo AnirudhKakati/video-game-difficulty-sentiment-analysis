@@ -92,7 +92,7 @@
                 First, we compiled all JSON files into one single pandas dataframe for data preprocessing. 
                 Any duplicate or non english records were removed. 
                 A field called “author” was a dictionary, which was flattened by appending each of its keys as a separate column in the dataframe. 
-                Records without “playtime_at_review” fields were dropped. For our analysis we would only need the columns: "game_name","review","voted_up","timestamp_created","author_num_games_owned","author_num_reviews","author_playtime_at_review","author_playtime_last_two_weeks" and "author_playtime_forever".
+                Records without “playtime_at_review” fields were dropped. For our analysis we would only need the columns: "game_name", "review", "voted_up", "timestamp_created", "author_num_games_owned", "author_num_reviews", "author_playtime_at_review", "author_playtime_last_two_weeks" and "author_playtime_forever".
                 Only these relevant columns were kept with others getting discarded. 
                 The "review" column was cleaned with all text being converted to lowercase for uniformity, punctuation and non alphanumeric characters were removed using regular expressions. 
                 We also filter out reviews with lack of meaningful content. We do this by first checking if the review has "valid words".
