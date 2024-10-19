@@ -30,66 +30,56 @@
             <p>
                 Our data source was steam reviews which were collected using Steam’s GetAppReviews API. 
                 Using the API we fetched 1500 reviews per game, in batches of 100 reviews per API call, for a total of around 45000 reviews to work with. 
-                We selected a diverse set of 30 games from a variety of genres like RPG, shooters, puzzle, simulation, etc.
+                We selected a diverse set of 30 games, both with and without adjustable difficulty settings, from a variety of genres like RPG, shooters, puzzle, simulation, etc.
                 The full list of games is below:
-                <ul>
-                    <li> High difficulty games with no adjustable difficulty
-                        <ol>
-                            <li>Elden Ring (RPG/Action)</li>
-                            <li>Sekiro: Shadows Die Twice (Action/Adventure)</li>
-                            <li>Dark Souls Remastered (RPG/Action)</li>
-                            <li>Armored Core VI: Fires of Rubicon (Mech Combat/Action)</li>
-                            <li>Hollow Knight (Metroidvania/Platformer)</li>
-                        </ol>
-                    </li>
-                    <li> Difficult Games with an alternative easy mode 
-                        <ol>
-                            <li>Hades (Roguelike/Action)</li>
-                            <li>Dead Cells (Roguelike/Action)</li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <ol>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <ol>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <ol>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
-                    </li>
-                    <li> Competitive multiplayer games
-                        <ol>
-                            <li>Counter Strike 2 (FPS/Competitive)</li>
-                            <li>Call of Duty: Modern Warfare (FPS/Competitive)</li>
-                            <li>Team Fortress 2 (FPS/Competitive)</li>
-                            <li>Rocket League (Sports/Competitive)</li>
-                            <li>Dota 2 (MOBA/Competitive)</li>
-                        </ol>
-                    </li>
-                </ul>
             </p>
+            <div class="two-column-list">
+                <ol>
+                    <li>Elden Ring</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+                <ol start="16">
+                    <li>Sekiro</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+            </div>
         </section>
+        <style>
+            .two-column-list {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .two-column-list ol {
+                width: 48%; /* Adjust as needed */
+            }
+        </style>
 
         <section id="data-preprocessing">
             <h3>Data Preprocessing</h3>
