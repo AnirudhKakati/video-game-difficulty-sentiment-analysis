@@ -6,6 +6,9 @@
     <title>Data Exploration - Player Sentiment Analysis in Video Games</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
 </head>
 <body style="background-image: url('images/background7.jpg');">
     <header>
@@ -114,6 +117,15 @@
                 <img src="[path-to-your-image]" alt="[Description of visualization]">
                 <p>[Brief explanation and insights]</p>
             </div>
+            <pre><code class="language-python">
+                import pandas as pd
+                
+                # Load the dataset
+                df = pd.read_csv('game_reviews.csv')
+                
+                # Display the first few rows
+                print(df.head())
+            </code></pre>
         </section>
 
     </main>
