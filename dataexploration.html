@@ -107,15 +107,51 @@
                 The cleaned dataset is stored in a csv which looks like this:
             </p>
             <img src="images/cleaned_dataset.jpg" alt="Cleaned Dataset Image" class="data-image">
-            
+            <p>For a detailed walkthrough of our data collection and preprocessing step, you can view our 
+                full Jupyter notebook <a href="getting_and_cleaning_reviews.html" target="_blank">here</a>.
+            </p>
         </section>
 
         <section id="visualizations">
             <h3>Inital Data Exploration and Visualizations</h3>
+            <p>
+                First we look at some inital data exploration. We load our cleaned reviews dataset into a pandas dataframe df. The columns along with their data types look like this:
+            </p>
+            <img src="images/columns_and_datatypes.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <p>
+                We have 9 columns, with game_name and the review being objects (string), the voted_up which indicates if the review was positive or negative being boolean,
+                and all our columns with information about the author of the review being numerical.
+                We can then get a summary of all numerical columns of our dataset:
+            </p>
+            <img src="images/numerical_summary.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <p>
+                Some common statistics like the mean, standard deviation and other percentile values for all our numerical columns are displayed.
+                We can then see how many positive and negative reviews we have in total in our dataset.
+            </p>
+            <img src="images/positive_negative_count.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <p>
+                There around 38600 positive reviews and 4300 negative reviews.
+                Now lets look at some specific columns which are of importance to us. Lets check the average review length.
+            </p>
+            <img src="images/average_review_length.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <p>
+                We can see that people use around 172 characters on average in their reviews. 
+                We'll look at the average playtime across all the games in hours played next.
+            </p>
+            <img src="images/average_playtime_hours.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <p>
+                The average playtime of the reviewed games is around 185 hours. So people really spend a lot of time playing games!
+                Lets check if there's any correlation between playing time and review length.
+            </p>
+            <img src="images/playtime_review_length_corr.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <p>
+                No significant correlation can be found between the review length and time spent playing that game. 
+                So its not like people who play games for longer write longer reviews.
+            </p>
+            <p>
+                Now its time for us to look at some visualizations to a get a better look at our data.
+            </p>
             <div class="visualization">
-                <p>For a detailed walkthrough of our data exploration process and visualizations, you can view our 
-                    full Jupyter notebook <a href="initial_data_exploration_and_visualization.html" target="_blank">here</a>.
-                </p>
                 <h4>Visualization 1: [Title]</h4>
                 <img src="[path-to-your-image]" alt="[Description of visualization]">
                 <p>[Brief explanation and insights]</p>
@@ -129,6 +165,9 @@
                 # Display the first few rows
                 print(df.head())
             </code></pre>
+            <p>For a detailed walkthrough of our data exploration process and visualizations, you can view our 
+                full Jupyter notebook <a href="initial_data_exploration_and_visualization.html" target="_blank">here</a>.
+            </p>
         </section>
 
     </main>
