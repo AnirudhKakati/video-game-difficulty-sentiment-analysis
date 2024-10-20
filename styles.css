@@ -140,10 +140,11 @@ a:hover {
 .data-image {
     max-width: 100%;
     height: auto;
-    margin: 1.5rem 0;
+    margin: 1.5rem auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(193, 155, 79, 0.2);
     transition: transform 0.3s ease;
+    display: block;
 }
 
 .data-image:hover {
