@@ -7519,12 +7519,12 @@ a.anchor-link {
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This function gets 1500 most recent steam reviews of the game with the specified steam app id</span>
 <span class="sd">    """</span>
-    <span class="n">total_reviews</span> <span class="o">=</span> <span class="mi">1500</span> <span class="c1">#we collect 1000 reviews</span>
+    <span class="n">total_reviews</span> <span class="o">=</span> <span class="mi">1500</span> <span class="c1">#we collect 1500 reviews</span>
     <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://store.steampowered.com/appreviews/</span><span class="si">{</span><span class="n">app_id</span><span class="si">}</span><span class="s2">"</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="s1">'*'</span> <span class="c1">#each API call returns reviews in batches. To access the next batch we need this cursor parameter</span>
     <span class="n">all_reviews</span> <span class="o">=</span> <span class="p">[]</span>
     
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_reviews</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">total_reviews</span><span class="p">:</span> <span class="c1">#till review count becomes 1000</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_reviews</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">total_reviews</span><span class="p">:</span> <span class="c1">#till review count becomes 1500</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">"json"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
             <span class="s2">"filter"</span><span class="p">:</span> <span class="s2">"recent"</span><span class="p">,</span> <span class="c1">#we filter the reviews by recent        </span>
