@@ -140,7 +140,13 @@
             </p>
             <img src="images/average_playtime_hours.jpg" alt="Cleaned Dataset Image" class="data-image">
             <p>
-                The average playtime of the reviewed games is around 185 hours. So people really spend a lot of time playing games!
+                The average playtime of the reviewed games is around 185 hours. This seems very high. Does the average gamer really spend this much time on a game?
+                Since our review data includes some multiplayer games where players tend to invest much more time, the data can get skewed.
+                Let us look at median playtime of the reviewed games in hours played.
+            </p>
+            <img src="images/median_playtime_hours.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <p>
+                The median comes out to be around 35 hours. This is more representative of how much time gamers usually spend on a game.
                 Lets check if there's any correlation between playing time and review length.
             </p>
             <img src="images/playtime_review_length_corr.jpg" alt="Cleaned Dataset Image" class="data-image">
@@ -152,19 +158,53 @@
                 Now its time for us to look at some visualizations to a get a better look at our data.
             </p>
             <div class="visualization">
-                <h4>Visualization 1: </h4>
-                <img src="[path-to-your-image]" alt="[Description of visualization]">
-                <p>[Brief explanation and insights]</p>
+                <h4> Median Playtime (in hours) by game </h4>
+                <p> 
+                    First let us look at what the median playtime for each game looks like.
+                </p>
+                <img src="graphs/playtime_by_game.png" alt="Median Playtime" class="data-image">
+                <p>
+                    As one would expect, multiplayer PVP games like DOTA 2, Rocket League and Counter Strike 2 have the highest playtimes, where as single player and CO-OP titles like INSIDE, and Portal 2 have shorter playtimes.
+                    Call of Duty Modern Warfare has both multiplayer and singleplayer options but still has low playtimes, which might indicate that people tend to drop the game after playing the singleplayer campaign and don't indulge too much into multiplayer.
+                </p>
+                
+                <h4> Average Review Length by Game </h4>
+                <p> 
+                    Let us see how long the average review is for each game.
+                </p>
+                <img src="graphs/review_length_by_game.png" alt="Review length" class="data-image">
+                <p>
+                    Pillars of Eternity seems to have the longest reviews with Counter Strike 2 having the shortest.
+                </p>
+                
+                <h4> Review Sentiment Distribution by Game </h4>
+                <p> 
+                    We explore the distribution of positive and negative reviews for each game.
+                </p>
+                <img src="graphs/review_sentiment_by_game.png" alt="Review Sentiment" class="data-image">
+                <p>
+                    It seems that multiplayer games like Rocket League, Team Fortress 2 and Counter Strike 2 have a higher ratio of negative reviews than other single player and CO-OP games. 
+                </p>
+
+                <h4> Percentage of Positive Reviews by Game </h4>
+                <p> 
+                    If we want to explore review sentiment of the games further we can see the sorted percentages of positive reviews for the games.
+                </p>
+                <img src="graphs/percentage_positive_reviews.png" alt="Positive Sentiment" class="data-image">
+                <p>
+                    Portal 2 has the highest percentage of positive reviews with Rocket League having the least.
+                </p>
+
+                <h4> Percentage of Positive Reviews by Game </h4>
+                <p> 
+                    If we want to explore review sentiment of the games further we can see the sorted percentages of positive reviews for the games.
+                </p>
+                <img src="graphs/percentage_positive_reviews.png" alt="Positive Sentiment" class="data-image">
+                <p>
+                    Portal 2 has the highest percentage of positive reviews with Rocket League having the least.
+                </p>
+                
             </div>
-            <pre><code class="language-python">
-                import pandas as pd
-                
-                # Load the dataset
-                df = pd.read_csv('game_reviews.csv')
-                
-                # Display the first few rows
-                print(df.head())
-            </code></pre>
             <p>For a detailed walkthrough of our data exploration process and visualizations, you can view our 
                 full Jupyter notebook <a href="initial_data_exploration_and_visualization.html" target="_blank">here</a>.
             </p>
