@@ -158,7 +158,7 @@
                 Now its time for us to look at some visualizations to a get a better look at our data.
             </p>
             <div class="visualization">
-                <h4> Median Playtime (in hours) by game </h4>
+                <h4> Median Playtime (in hours) by Game </h4>
                 <p> 
                     First let us look at what the median playtime for each game looks like.
                 </p>
@@ -174,7 +174,8 @@
                 </p>
                 <img src="graphs/review_length_by_game.png" alt="Review length" class="data-image">
                 <p>
-                    Pillars of Eternity seems to have the longest reviews with Counter Strike 2 having the shortest.
+                    Pillars of Eternity, Returnal and The Witness seem to have the longest reviews while Counter Strike 2 and DOTA 2 have the shortest. 
+                    Multiplayers games tend to have shorter reviews compared to the others.
                 </p>
                 
                 <h4> Review Sentiment Distribution by Game </h4>
@@ -192,16 +193,67 @@
                 </p>
                 <img src="graphs/percentage_positive_reviews.png" alt="Positive Sentiment" class="data-image">
                 <p>
-                    Portal 2 has the highest percentage of positive reviews with Rocket League having the least.
+                    Portal 2, Subnautica and Factorio have the highest percentage of positive reviews wherease Rocket League, Team Fortress 2 and Counter Strike 2 have the least.
                 </p>
 
-                <h4> Percentage of Positive Reviews by Game </h4>
+                <h4> Review Length vs Playtime </h4>
                 <p> 
-                    If we want to explore review sentiment of the games further we can see the sorted percentages of positive reviews for the games.
+                    We can visualize the distribution of the length of the reviews and the playtime while writing the review.
                 </p>
-                <img src="graphs/percentage_positive_reviews.png" alt="Positive Sentiment" class="data-image">
+                <img src="graphs/review_length_vs_playtime.png" alt="Length vs Sentiment" class="data-image">
                 <p>
-                    Portal 2 has the highest percentage of positive reviews with Rocket League having the least.
+                    Its hard to identify any specific relationship between the two. But we can also see that both the reviews length and playtime tend to be on the shorter side.
+                    We have too many data points and its hard to see the proper distribution. So we'll take a sample of 1000 reviews and then plot them next.
+                </p>
+
+                <h4> Review Length vs Playtime (Sampled and Zoomed) </h4>
+                <p> 
+                    We take a sample of 1000 random reviews from our set to get a clearer visual. We also limit our playtime from 0 to 2000 hours and review length from o to 1000 characters as thats where most data points lie.
+                </p>
+                <img src="graphs/review_length_vs_playtime_sampled_data.png" alt="Length vs Sentiment zoomed" class="data-image">
+                <p>
+                    We can see most playtimes are under 250 hours and most reviews are also under 200 characters. People tend to write short reviews for most games they play.
+                </p>
+
+                <h4> Distribution of When Reviews are Posted </h4>
+                <p> 
+                    The ratio of playtime at review to the total playtime can give us an idea about when people tend to post their reviews. 
+                    A small ratio means the reviews were posted very early on when they started playing the game and bigger ratios would mean the reviews were posted closer to the end of their gameplay.
+                </p>
+                <img src="graphs/distribution_of_playtime_ratio.png" alt="Playtime ratio distribution" class="data-image">
+                <p>
+                    We can see most highest ratios are more common. So most gamers tend to put their reviews closer to the end of their gameplay. 
+                    This means they are more likely to post the reviews when they have completed the game or they dont play it anymore.
+                    Very few people tend to post reviews of games as they're playing them.
+                </p>
+
+                <h4> Word Cloud of Most frequent Words </h4>
+                <p> 
+                    Let us visualize what kind of words are most frequently used in our reviews.
+                </p>
+                <img src="graphs/word_cloud.png" alt="wordcloud" class="data-image">
+                <p>
+                    Words like "game", "play", "good", "time", "feel", "fun", "story", etc. are very commonly used across our reviews. 
+                    But we have predominantly positive reviews so words used in those will overshadow words used in negative ones.
+                    Let us see if the kind of words used changes across positive and negative reviews
+                </p>
+
+                <h4> Word Cloud of Most frequent Words across Positive Reviews</h4>
+                <p> 
+                    First, let us visualize what kind of words are most frequently used in positive reviews.
+                </p>
+                <img src="graphs/wordcloud_positive.png" alt="wordcloud positive" class="data-image">
+                <p>
+                    Words like "game", "play", "good", "one", "fun", "time" are very common. These are the same ones which appeared in our overall word cloud.
+                </p>
+
+                <h4> Word Cloud of Most frequent Words across Negative Reviews</h4>
+                <p> 
+                    Next, let us visualize what kind of words are most frequently used in negative reviews.
+                </p>
+                <img src="graphs/wordcloud_negative.png" alt="wordcloud negative" class="data-image">
+                <p>
+                    In negative reviews, words like "game", "play", "time", "one" are still the most common but words like "good" and "fun" become much less frequent.
                 </p>
                 
             </div>
