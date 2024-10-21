@@ -255,6 +255,39 @@
                 <p>
                     In negative reviews, words like "game", "play", "time", "one" are still the most common but words like "good" and "fun" become much less frequent.
                 </p>
+
+                <h4> Review Length Distribution by Review Sentiment</h4>
+                <p> 
+                    The review length for each type of sentiment is analyzed next.
+                </p>
+                <img src="graphs/review_length_by_sentiment" alt="review length by sentiment" class="data-image">
+                <p>
+                    We limit our review length to upto 1000 characters as we have lot of outliers.
+                    Positive Reviews tend to have much lesser median number of charcaters. 
+                    Negative reviews tend to be longer with a wider interquartile range.
+                </p>
+
+                <h4> Playtime distribution by Review Sentiment</h4>
+                <p> 
+                    We now explore the distribution of playtime of two sentiments of reviews.
+                </p>
+                <img src="graphs/playtime_by_sentiment" alt="playtime by sentiment" class="data-image">
+                <p>
+                    Both types of reviews have a lot of outliers so we limit our playtime to upto 1000.
+                    Positive Reviews tend to have a higher median playtime compared to negative reviews. 
+                    However negative reviews have a much wider interquartile range of playtimes.
+                </p>
+
+                <h4> Frequency of Positive and Negative Reviews with Playtime</h4>
+                <p> 
+                    Finally, let us see the frequency of negative and positive reviews for different ranges of playtime.
+                </p>
+                <img src="graphs/review_sentiment_by_playtime.png" alt="playtime by sentiment" class="data-image">
+                <p>
+                    Shorter playtimes have a higher ratio of negative to positive reviews compared to longer reviews. 
+                    As evident from the median, people tend to play for shorter times when they leave a negative review.
+                    The playtimes between 1000 to 5000 minutes has the most number of reviews. 
+                </p>
                 
             </div>
             <p>For a detailed walkthrough of our data exploration process and visualizations, you can view our 
