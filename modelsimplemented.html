@@ -30,7 +30,7 @@
             margin: 5px 0;
         }
     </style>
-<body style="background-image: url('images/background3.jpg');">
+<body style="background-image: url('images/background8.jpg');">
     <header>
         <h1>Player Sentiment Analysis in Video Games</h1>
         <nav>
@@ -248,7 +248,36 @@
                 Overall, while there was a minor gain in precision for negative reviews, the drop in recall led to no significant improvement in the overall metrics.
             </p>
         </section>
-
+        <section id="LightGBM Classifier Model">
+            <h3>3. LightGBM Classifier Model with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+        </section>
+        <section id="Ensemble LightGBM, LR, NB Model">
+            <h3>4. Ensemble Stacking Model using LightGBM, Logistic Regression and Naïve Bayes with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+        </section>
+        <section id="Bagging with LightGBM Model ">
+            <h3>5. Bagging Model using LightGBM Classifier with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+        </section>
+        <section id="LightGBM Classifier Model 2">
+            <h3>6. LightGBM Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+        </section>
+        <section id="XGBoost Classifier Model ">
+            <h3>7. XGBoost Classifier Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+        </section>
+        <section id="Ensemble XGBoost, LR, NB Model ">
+            <h3>8. Ensemble Stacking Model using XGBoost Classifier, Logistic Regression and Naïve Bayes with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+        </section>
+        <section id="Ensemble LightGBM, LR, NB Model 2">
+            <h3>9. Ensemble Stacking Model using LightGBM, Logistic Regression and Naïve Bayes with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+        </section>
+        <section id="DT Classifier Model ">
+            <h3>10. Decision Tree Model with genre data as input and "mentions_difficulty" as output</h3>
+        </section>
+        <section id="RF Classifier Model ">
+            <h3>11. Random Forest Model with genre data as input and "mentions_difficulty" as output</h3>
+        </section>
+        <section id="LR Classifier Model ">
+            <h3>12. Logistic Regression Model with genre data as input and "mentions_difficulty" as output</h3>
+        </section>
     </main>
 
     <footer>
