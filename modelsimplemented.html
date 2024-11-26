@@ -28,66 +28,40 @@
     <main>
         <h2>Model Implementation</h2>
 
-        <section id="data-collection">
-            <h3>Data Collection</h3>
+        <section id="BERT-model">
+            <h3>1. BERT Transformer Model with “review” as input and “voted_up” as output</h3>
             <p>
-                Our data source was steam reviews which were collected using Steam’s GetAppReviews API. 
-                Using the API we fetched 1500 reviews per game, in batches of 100 reviews per API call, for a total of around 45000 reviews to work with. 
-                We selected a diverse set of 30 games, both with and without adjustable difficulty settings, from a variety of genres like RPG, shooters, puzzle, simulation, etc.
-                The full list of games is below:
+                The BERT model (Bidirectional Encoder Representations from Transformers) is a pre-trained transformer-based language model designed to understand text context bidirectionally. 
+                We leveraged it for text classification by fine-tuning it on our dataset to predict whether a review was positive (voted_up)/
             </p>
-            <div class="two-column-list">
-                <ol>
-                    <li>Elden Ring (RPG/Action)</li>
-                    <li>Sekiro: Shaodws Die Twice (Action/Adventure)</li>
-                    <li>Dark Souls Remastered (RPG/Action)</li>
-                    <li>Armored Core VI: Fires of Rubicon (Mech Combat/Action)</li>
-                    <li>Hollow Knight (Metroidvania/Platformer)</li>
-                    <li>Hades (Roguelike/Action)</li>
-                    <li>Dead Cells (Roguelike/Metroidvania)</li>
-                    <li>Slay the Spire (Roguelike/Deckbuilding)</li>
-                    <li>Returnal (Third-Person Shooter/Roguelite)</li>
-                    <li>Risk of Rain 2 (Action/Roguelike)</li>
-                    <li>The Witcher 3 (Open World/RPG)</li>
-                    <li>Mass Effect Legendary Edition (Third-Person Shooter/RPG)</li>
-                    <li>Divinity: Original Sin 2 (Tactical RPG)</li>
-                    <li>Baldur's Gate 3 (Turnbased/RPG)</li>
-                </ol>
-                <ol start="15">
-                    <li>Pillars of Eternity (Isometric RPG)</li>
-                    <li>Portal 2 (Puzzle/Platformer)</li>
-                    <li>The Witness (Puzzle/Exploration)</li>
-                    <li>Celeste (Platformer/Adventure)</li>
-                    <li>Ori and the Blind Forest (Platformer/Metroidvania)</li>
-                    <li>INSIDE (Puzzle/Adventure)</li>
-                    <li>Stardew Valley (Farming/Life Simulation)</li>
-                    <li>Factorio (Automation/Management)</li>
-                    <li>Frostpunk (Survial/City Building)</li>
-                    <li>The Forest (Survival/Adventure)</li>
-                    <li>Subnautica (Exploration/Survival)</li>
-                    <li>Call of Duty: Modern Warfare (Tactical FPS)</li>
-                    <li>Rocket League (Sports/Competitive)</li>
-                    <li>Counter-Strike 2 (FPS/Competitive)</li>
-                    <li>Team Fortress 2 (Multiplayer FPS)</li>
-                    <li>Dota 2 (MOBA/Competitive)</li>
-                </ol>
-            </div>
             <p>
-                The API returns the reviews in JSON Format. The raw review data for each game looks something like this:
+                We will first load in our featured_reviews.csv into a dataframe. We take our “review” feature as X or our input and take “voted_up” as y or our output. 
+                The data initially looks like this:
             </p>
             <img src="images/raw_review_data.jpg" alt="Raw Review Image" class="data-image">
+            <p>
+                BERT model first tokenizes this text data before training. The tokenized transformed data looks like this:
+            </p>
+            <img src="images/raw_review_data.jpg" alt="Raw Review Image" class="data-image">
+            <p>
+                Our processing involves the following steps:
+                <ul>
+                    <li>Used BERT's pre-trained tokenizer (bert-base-uncased) to tokenize the review text</li>
+                    <li>Each review was: <br>
+                        <ul type="o">
+                            <li>Split into tokens</li>
+                            <li>Converted into unique token IDs (input_ids)</li>
+                            <li>Padded or truncated to a maximum length of 128 tokens</li>
+                            <li>Generated an attention_mask to indicate which tokens should be attended to</li>
+                        </ul>
+                    </li>
+                    <li> Created a ReviewDataset class to manage the tokenized inputs and corresponding labels</li>
+                    <li>Split the dataset into training and testing sets (X_train, y_train, X_test, y_test)</li>
+                </ul>
+            </p>
         </section>
-        <style>
-            .two-column-list {
-                display: flex;
-                justify-content: space-between;
-            }
-            
-            .two-column-list ol {
-                width: 48%;
-            }
-        </style>
         
+                
         <section id="data-preprocessing">
             <h3>Data Preprocessing</h3>
             <p>
