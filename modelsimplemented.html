@@ -58,11 +58,11 @@
                 We will first load in our featured_reviews.csv into a dataframe. We take our “review” feature as X or our input and take “voted_up” as y or our output. 
                 The data initially looks like this:
             </p>
-            <img src="images/raw_review_data.jpg" alt="Raw Review Image" class="data-image">
+            <img src="images/model1.jpg" alt="Raw Review Image" class="data-image">
             <p>
                 BERT model first tokenizes this text data before training. The tokenized transformed data looks like this:
             </p>
-            <img src="images/raw_review_data.jpg" alt="Raw Review Image" class="data-image">
+            <img src="images/model1.jpg" alt="Raw Review Image" class="data-image">
             <p>
                 Our processing involves the following steps:
                 <ul>
@@ -79,9 +79,66 @@
                     <li>Split the dataset into training and testing sets (X_train, y_train, X_test, y_test)</li>
                 </ul>
             </p>
+            <p>
+                The model training involved the following:
+                <ul>
+                    <li>Architecture:<br>
+                        <ul type="o">
+                            <li>Fine-tuned the bert-base-uncased model for binary classification</li>
+                            <li>Added a classification head on top of BERT to predict the voted_up label (output layer with sigmoid activation for probabilities)</li>
+                        </ul>
+                    </li>
+                    <li>Training Configuration:<br>
+                        <ul type="o">
+                            <li>Optimized with AdamW (specific for transformers)</li>
+                            <li>Loss function: Binary Cross-Entropy Loss</li>
+                            <li>Metrics: Accuracy, F1-Score</li>
+                            <li>Batch size: Adjusted to fit the GPU memory</li>
+                            <li>Learning rate: Fine-tuned with a warm-up scheduler for stable convergence</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After training the BERT model, we evaluated it on the test set. Below are the results:
+            </p>
+            <img src="images/model1.jpg" alt="Raw Review Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 93.44%</li>
+                    <li>F1 Score: 96.36% (for class 1 positive reviews)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 65%</li>
+                                    <li>Recall: 69%</li>
+                                    <li>F1 Score: 67%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 97%</li>
+                                    <li>Recall: 96%</li>
+                                    <li>F1 Score: 96%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 94%, Recall = 93%, F1-Score = 94%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                The model performs exceptionally well for positive reviews (class 1), which dominate the dataset. 
+                Performance for negative reviews (class 0) is weaker, with lower precision and recall. 
+                The overall weighted metrics indicate a robust model for predicting review positivity
+            </p>
+            <p>
+                To try to improve our model we will incorporate more features into the next model
+            </p>
+            
         </section>
         
-                
         <section id="data-preprocessing">
             <h3>Data Preprocessing</h3>
             <p>
