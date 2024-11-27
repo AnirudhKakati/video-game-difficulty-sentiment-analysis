@@ -248,9 +248,139 @@
                 Overall, while there was a minor gain in precision for negative reviews, the drop in recall led to no significant improvement in the overall metrics.
             </p>
         </section>
+        
         <section id="LightGBM Classifier Model">
             <h3>3. LightGBM Classifier Model with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+            <p>
+                We will now use a LightGBM classifier model to try to model the same relationship. The data looks like this again:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The numerical columns are again normalized and the data looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The review data is transformed for it to work with our classifier model. 
+                The transformation involves converting raw review text into numerical features using TF-IDF (Term Frequency-Inverse Document Frequency). 
+                This step allows text data to be represented numerically for machine learning models. The steps are:
+                <uL>
+                    <li>Tokenization: The TfidfVectorizer splits each review into individual words (tokens)</li>
+                    <li>Vocabulary Creation: Builds a vocabulary of the most frequent 5000 words across all reviews</li>
+                    <li>TF-IDF Score Calculation: Assigns a score to each word based on its frequency in the review (Term Frequency) and its rarity across all reviews (Inverse Document Frequency)</li>
+                    <li>Sparse Matrix Representation: Converts each review into a row of numerical values (TF-IDF scores), where: <br>
+                        <ul>
+                            <li>Rows = Reviews</li>
+                            <li>Columns = Words in the vocabulary</li>
+                            <li>Values = Importance of the word in that review</li>
+                        </ul>
+                    </li>
+                </uL>
+            </p>
+            <p>
+                The transformed data looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                We used LightGBM (LGBMClassifier), a gradient boosting framework that is highly efficient for handling large datasets and sparse matrices (like our TF-IDF + numerical features). 
+                The model was initialized with the parameter class_weight="balanced" to handle class imbalance between positive (voted_up=1) and negative (voted_up=0) reviews.
+            </p>
+            <p>
+                The model was trained on the combined feature set of:
+                <ul>
+                    <li>TF-IDF matrix: Captures the textual content of the review</li>
+                    <li>Scaled numerical features: review_length and sentiment_score</li>
+                </ul>
+            </p>
+            <p>
+                Hyperparameter Tuning: To improve the model’s performance, we conducted a Grid Search over a reduced parameter space to find the best combination of hyperparameters. 
+                The following parameters were tuned:
+                <uL>
+                    <li>learning_rate: Controls how much the model adjusts weights after each boosting round</li>
+                    <li>n_estimators: The number of boosting rounds</li>
+                    <li>max_depth: The depth of each decision tree</li>
+                    <li>subsample: The proportion of samples used for training each tree</li>
+                    <li>colsample_bytree: The proportion of features used for training each tree</li>
+                </uL>
+                We used GridSearchCV with 3-fold cross-validation and optimized for the F1-score, balancing precision and recall
+            </p>
+            <p>
+                Threshold Adjustment: In the best parameter model, we adjusted the decision threshold (default is 0.5) to optimize performance for different class priorities.
+                The steps were the following:
+                <ul>
+                    <li>Obtained prediction probabilities using model.predict_proba</li>
+                    <li>Tested thresholds ranging from 0.1 to 0.6</li>
+                    <li>Evaluated metrics (precision, recall, F1-score) for each threshold</li>
+                </ul>
+                By lowering the threshold we improved recall for class 0 (negative reviews), reducing false negatives. 
+                But by increasing the threshold precision for class 1 (positive reviews) improved, which reduced false positives.
+                To balance both out, a threshold value of 0.2 was chosen.
+            </p>
+            <p>
+                The results before hyperparameter tuning and threshold adjustment are the following:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 87%</li>
+                    <li>F1 Score: 88% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 40%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 53%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 97%</li>
+                                    <li>Recall: 88%</li>
+                                    <li>F1 Score: 92%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 92%, Recall = 87%, F1-Score = 88%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and threshold adjust, the following were the results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 91%</li>
+                    <li>F1 Score: 91% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 56%</li>
+                                    <li>Recall: 56%</li>
+                                    <li>F1 Score: 56%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 95%</li>
+                                    <li>F1 Score: 95%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 91%, Recall = 91%, F1-Score = 91%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After hyperparameter tuning and threshold adjustment, the LightGBM model showed notable improvements in balancing precision and recall for Class 0 (negative reviews). 
+                Precision and recall for Class 0 improved to 56%, raising the F1-score from 53% to 56%. Class 1 (positive reviews) maintained strong performance, with an F1-score of 95%, and the overall accuracy increased from 87% to 91%. 
+                While the model successfully enhanced detection of negative reviews, the F1-score for Class 0 remains moderate due to class imbalance. The macro-average F1-score improved to 76%, but weighted F1-score showed minimal change. 
+                These results indicate that the tuning effectively balanced performance between classes, though further techniques might be required to address residual challenges in negative review detection
+            </p>
         </section>
+
         <section id="Ensemble LightGBM, LR, NB Model">
             <h3>4. Ensemble Stacking Model using LightGBM, Logistic Regression and Naïve Bayes with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
         </section>
