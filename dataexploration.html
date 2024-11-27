@@ -295,6 +295,119 @@
                 full Jupyter notebook <a href="initial_data_exploration_and_visualization.html" target="_blank">here</a>.
             </p>
         </section>
+        <section id="feature-engineering">
+            <h3>Feature Engineering</h3>
+            <p>
+                On the cleaned dataset, we will do some more preprocessing and feature engineering. The cleaned data looked like this:
+            </p>
+            <img src="images/cleaned_dataset.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <p>
+                We use the nltk package to get a set of stop words. Stop words are frequently used words (like "and," "the," "is") that generally do not add significant meaning to text analysis. 
+                We will remove these words from our review. The review column now looks like this:
+            </p>
+            <img src="images/data.jpg" alt="image" class="data-image">
+            <p>
+                We will define a set of words which are commonly used to express difficulty in the gaming world. These include: <br>
+                'formidable', 'galaxybrain', 'merciless', 'tiresome', 'impossible', 
+                'intense', 'punishing', '2ez', 'moderate', 'smurfing', 'standard', 'daunting', 'bonkers', 'harsh', 'noobfriendly', 
+                'git', '2easy', 'exhausting', 'overwhelming', 'busted', 'chill', 'ggez', 'accessible', 'filthycasual', 'relentless', 
+                'hefty', 'hardcore', 'tricky', 'casual', 'ez', 'ultrahard', 'boomerfriendly', 'masochistic', 'fair', 'frustrating', 'getgood', 
+                'megahard', 'relaxing', 'rigorous', 'sweaty', 'extreme', 'reasonable', 'steady', 'robust', 'soulcrushing', 'casul', 'broken', 'taxing', 
+                'hard', 'strict', 'straightforward', 'savage', 'bigbrain', 'technical', 'insane', 'demonic', 'easymode', 'omegahard', 'skillcheck', 'deadly', 
+                'breezy', 'diabolical', 'issue', 'skillbased', 'expertlevel', 'tryhard', 'challenging', 'touchgrass', 'rekted', 'gud', 'nolife', 'touch grass', 
+                'complex', 'forgiving', 'zoomer', 'ruthless', 'fierce', 'backbreaking', 'tortuous', 'tough', 'intensive', 'maddening', 'wicked', 'rageinducing', 
+                'beastly', 'ridiculous', 'progamer', 'mindbending', 'basic', 'troublesome', 'hardmode', 'gentle', 'demanding', 'thorough', 'vicious', 'omegalul', 
+                'skill', 'crushing', 'ezpz', 'unbearable', 'brutal', 'middleground', 'rage', 'painful', 'rip', 'evenpaced', 'gigahard', 'crazy', 'kekw', 'skill check', 
+                'grueling', 'gitgud', 'laidback', 'nightmarish', 'gradual', 'simple', 'stressful', 'unforgiving', 'balanced', 'strategic', 'rekt', 'severe', 'scrubfriendly', 
+                'difficult', 'skillissue', 'oppressive', 'normiefriendly', 'manageable', 'beginnerfriendly', 'rough', 'hellish' <br>
+                Using this set of words, we will derive a new feature to count the number of words used to describe difficulty. 
+                This will later help us identify which reviews mention difficulty and which don't. 
+                From this we will extract another binary feature to classify which reviews mention difficulty (i.e. difficulty word count >0) and which don't.
+                We will also derive a new feature called review length by taking the length of the review column.
+                The data after these features are added looks like this:
+            </p>
+            <img src="images/data.jpg" alt="image" class="data-image">
+            <p>
+                Next, we will define a mapping with games and a list of its genres. Using this we would be creating a new feature for genres. 
+                The genre mapping for each game is the following:
+            </p>
+            <div class="two-column-list">
+                <ol>
+                    <li>elden_ring : ['soulslike', 'open_world', 'rpg', 'third_person']</li>
+                    <li>sekiro : ['soulslike', 'action', 'adventure', 'third_person']</li>
+                    <li>dark_souls_remastered : ['soulslike', 'action', 'rpg', 'third_person']</li>
+                    <li>armored_core_6 : ['third_person', 'soulslike', 'action']/li>
+                    <li>hollow_knight : ['metroidvania', 'platformer', 'soulslike', '2d']</li>
+                    <li>hades : ['roguelike', 'action']</li>
+                    <li>dead_cells : ['action', 'adventure', 'roguelike', 'metroidvania', '2d']</li>
+                    <li>slay_the_spire : ['roguelike', 'deckbuilding', 'turn_based']</li>
+                    <li>returnal : ['action', 'roguelike', 'co_op', 'third_person', 'shooter']</li>
+                    <li>risk_of_rain_2 : ['action', 'roguelike', 'third_person', 'co_op', 'shooter']</li>
+                    <li>witcher_3 : ['open_world', 'rpg', 'adventure', 'fantasy']</li>
+                    <li>mass_effect : ['rpg', 'action', 'third_person', 'shooter']</li>
+                    <li>divinity_original_sin_2 : ['turn_based', 'rpg', 'strategy', 'crpg', 'fantasy']</li>
+                    <li>baldurs_gate_3 : ['turn_based', 'rpg', 'crpg', 'fantasy']</li>
+                </ol>
+                <ol start="15">
+                    <li>pillars_of_eternity : ['rpg', 'crpg', 'fantasy']</li>
+                    <li>portal_2 : ['platformer', 'puzzle', 'first_person']</li>
+                    <li>the_witness : ['puzzle', 'first_person', 'open_world']</li>
+                    <li>celeste : ['platformer', '2d']</li>
+                    <li>ori_and_the_blind_forest : ['platformer', '2d', 'metroidvania']</li>
+                    <li>inside : ['puzzle', 'platformer', '2d']</li>
+                    <li>stardew_valley : ['2d', 'sandbox', 'crafting', 'simulation']</li>
+                    <li>factorio : ['2d', 'sandbox', 'crafting', 'simulation', 'base_building', 'strategy', 'survival']</li>
+                    <li>frostpunk : ['base_building', 'strategy', 'survival', 'simulation']</li>
+                    <li>the_forest : ['survival', 'open_world', 'crafting', 'first_person']</li>
+                    <li>subnautica : ['survival', 'open_world', 'crafting', 'first_person']</li>
+                    <li>cod_modern_warfare : ['action', 'first_person', 'shooter', 'multiplayer']</li>
+                    <li>rocket_league : ['multiplayer', 'competitive']</li>
+                    <li>counter_strike_2 : ['multiplayer', 'competitive', 'first_person', 'shooter']</li>
+                    <li>team_fortress_2 : ['first_person', 'shooter', 'multiplayer']</li>
+                    <li>dota_2 : ['multiplayer', 'strategy', 'competitive']</li>
+                </ol>
+            </div>
+            <p>
+                We will directly one hot encode this genre feature instead of creating a single column first. 
+                We will initialize everything to 0 first and then for every game whichever genres were mapped, those columns are made 1.
+                The new data looks like has these new features now:
+            </p>
+            <img src="images/data.jpg" alt="image" class="data-image">
+            <p>
+                We will extract another feature which classified players as “beginner”, “intermediate” or “experienced”. 
+                For the specific game mentioned in the review, we will classify it as beginner if the author’s playtime is lower than the lower quartile playtime for that game. 
+                If the author’s playtime is greater than upper quartile playtime or if their number of games owned by them is greater than 30 then the record would be classified as experienced. 
+                If the number of games owned is greater than 10 and the playtime is above the median, then they would be classified as experienced as well. 
+                For other cases, they are classified as intermediate. 
+                It looks like this:
+            </p>
+            <img src="images/data.jpg" alt="image" class="data-image">
+            <p>
+                We will one hot encode this column. The new data looks like this:
+            </p>
+            <img src="images/data.jpg" alt="image" class="data-image">
+            <p>
+                Text reviews (review) contain detailed feedback, but their raw form is difficult for machine learning models to interpret directly. 
+                By extracting a sentiment score, we provide a numerical representation of the review’s polarity, making it easier for the model to process.
+                VADER (Valence Aware Dictionary and sEntiment Reasoner) is a pre-trained rule-based sentiment analysis tool from the NLTK library, designed to handle social media text and other short reviews. <br>
+                It provides four sentiment scores for a given text: <br>
+                <ul>
+                    <li>Positive: Proportion of positive words</li>
+                    <li>Neutral: Proportion of neutral words</li>
+                    <li>Negative: Proportion of negative words</li>
+                    <li>Compound: A single aggregated score that represents the overall sentiment of the text</li>
+                </ul>
+                For each review in the review column, we applied sia.polarity_scores(x) to compute sentiment scores. 
+                We selected the compound score, which is a normalized value between -1 (most negative) and 1 (most positive). 
+                This value is stored as the new column “sentiment_score”. The data looks like this now:
+            </p>
+            <img src="images/data.jpg" alt="image" class="data-image">
+            <p>
+                We save this updated dataset to a csv file. 
+                For a detailed walkthrough of our feature engineering process, you can view our 
+                full Jupyter notebook <a href="feature_engineering.html" target="_blank">here</a>.
+            </p>
+        </section>
 
     </main>
 
