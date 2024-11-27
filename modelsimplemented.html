@@ -383,7 +383,138 @@
 
         <section id="Ensemble LightGBM, LR, NB Model">
             <h3>4. Ensemble Stacking Model using LightGBM, Logistic Regression and Naïve Bayes with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+            <p>
+                We try to use an ensemble model for modelling the same relationship. The dataset is the same which looks like this after scaling:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The review is transformed again in a similar way as the last LightGBM model and it again looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                Ensemble models combine predictions from multiple base models to improve overall performance by leveraging the strengths of each model. 
+                We implemented a stacking ensemble model, which:
+                <uL>
+                    <li>Combines predictions from multiple base models</li>
+                    <li>Uses a meta-model (final estimator) to learn from these predictions and make the final decision</li>
+                </uL>
+                Our base models were the following:
+                <uL>
+                    <li> LightGBM Classifier <br>
+                        <ul>
+                            <li>A gradient boosting model, good for handling sparse data and complex patterns</li>
+                            <li>Parameters: class_weight='balanced', random_state=42</li>
+                        </ul>
+                    </li>
+                    <li> Logistic Regression <br>
+                        <ul>
+                            <li>A simple linear model, effective for linearly separable data</li>
+                            <li>Parameters: max_iter=1000</li>
+                        </ul>
+                    </li>
+                    <li> Multinomial NB
+                        <ul>
+                            <li>A probabilistic model, particularly suited for text data</li>
+                            <li>Works well when features (e.g., TF-IDF) are conditionally independent</li>
+                        </ul>
+                    </li>
+                </uL>
+                We used Logistic Regression as the meta-model, which learns how to combine predictions from the base models. 
+                Cross-validation (cv=3) ensures that the meta-model is trained on out-of-sample predictions
+            </p>
+            <p>
+                Each base model was trained on the training set. 
+                Predictions from these models were combined into new features for the meta-model.
+                The meta-model was trained on the combined predictions to make the final decision
+            </p>
+            <p>
+                Hyperparameter Tuning; To further optimize the stacking model, we performed hyperparameter tuning using grid search. 
+                The grid search used 3-fold cross-validation and was optimized for the weighted F1-score. The following following parameters were tuned:
+                <ul>
+                    <li> LightGBM Parameters<br>
+                        <ul>
+                            <li>n_estimators: Number of boosting rounds ([100, 150])</li>
+                            <li>learning_rate: Step size for weight updates ([0.05, 0.1])</li>
+                            <li>max_depth: Depth of each tree ([3, 5])</li>
+                        </ul>
+                    </li>
+                    <li>Logistic Regression Parameters (Meta-Model): <br>
+                        <ul>
+                            <li>C: Regularization strength ([0.1, 1.0]).</li>
+                        </ul>
+                    </li>
+                </ul>
+                We will also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the most optimal results so we choose this.
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 93%</li>
+                    <li>F1 Score: 93% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 75%</li>
+                                    <li>Recall: 51%</li>
+                                    <li>F1 Score: 61%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 98%</li>
+                                    <li>F1 Score: 96%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 93%, Recall = 93%, F1-Score = 93%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.7, we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 93%</li>
+                    <li>F1 Score: 93% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 65%</li>
+                                    <li>Recall: 62%</li>
+                                    <li>F1 Score: 63%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 96%</li>
+                                    <li>Recall: 96%</li>
+                                    <li>F1 Score: 96%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 93%, Recall = 93%, F1-Score = 93%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                The stacking ensemble model initially performed well, achieving a weighted F1-score of 93% and high precision and recall for Class 1 (positive reviews). 
+                However, Class 0 (negative reviews) struggled with a low recall of 51% and an F1-score of 61%, indicating room for improvement in identifying negative reviews. 
+                After hyperparameter tuning and adjusting the decision threshold to 0.7, the model showed a better balance for Class 0, with precision improving from 75% to 65% and recall increasing from 51% to 62%. Although the F1-score for Class 0 rose marginally to 63%, the performance for Class 1 remained robust, with a precision and recall of 96%. Overall accuracy remained consistent at 93%, and the macro-average F1-score improved slightly, indicating that threshold adjustment effectively enhanced the model's ability to identify negative reviews without sacrificing the performance for positive reviews
+            </p>
         </section>
+        
+
+
+
+        
         <section id="Bagging with LightGBM Model ">
             <h3>5. Bagging Model using LightGBM Classifier with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
         </section>
