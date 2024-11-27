@@ -368,6 +368,7 @@
                 </ol>
             </div>
             <p>
+                <br>
                 We will directly one hot encode this genre feature instead of creating a single column first. 
                 We will initialize everything to 0 first and then for every game whichever genres were mapped, those columns are made 1.
                 The new data looks like has these new features now:
@@ -390,7 +391,7 @@
                 Text reviews (review) contain detailed feedback, but their raw form is difficult for machine learning models to interpret directly. 
                 By extracting a sentiment score, we provide a numerical representation of the review’s polarity, making it easier for the model to process.
                 VADER (Valence Aware Dictionary and sEntiment Reasoner) is a pre-trained rule-based sentiment analysis tool from the NLTK library, designed to handle social media text and other short reviews. <br>
-                It provides four sentiment scores for a given text: <br>
+                It provides four sentiment scores for a given text:
                 <ul>
                     <li>Positive: Proportion of positive words</li>
                     <li>Neutral: Proportion of neutral words</li>
