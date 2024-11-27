@@ -363,10 +363,10 @@
                 </ul>
             </p>
             <p>
-                After hyperparameter tuning and threshold adjustment, the LightGBM model showed notable improvements in balancing precision and recall for Class 0 (negative reviews). 
-                Precision and recall for Class 0 improved to 56%, raising the F1-score from 53% to 56%. Class 1 (positive reviews) maintained strong performance, with an F1-score of 95%, and the overall accuracy increased from 87% to 91%. 
-                While the model successfully enhanced detection of negative reviews, the F1-score for Class 0 remains moderate due to class imbalance. The macro-average F1-score improved to 76%, but weighted F1-score showed minimal change. 
-                These results indicate that the tuning effectively balanced performance between classes, though further techniques might be required to address residual challenges in negative review detection
+                After hyperparameter tuning and threshold adjustment, the LightGBM model showed improvements in balancing precision and recall for Class 0 (negative reviews). 
+                Precision and recall for Class 0 became 53% and 54%, raising the F1-score from 52% to 54%. Class 1 (positive reviews) maintained strong performance, with an F1-score of 95%, and the overall accuracy increased from 86% to 91%. 
+                While the model successfully enhanced detection of negative reviews, the F1-score for Class 0 remains moderate due to class imbalance. The weighted F1-score improved to 91%. 
+                These results indicate that the tuning effectively balanced performance between classes, though further techniques might be required to address residual challenges in negative review detection.
             </p>
         </section>
 
@@ -375,11 +375,11 @@
             <p>
                 We try to use an ensemble model for modelling the same relationship. The dataset is the same which looks like this after scaling:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation7.jpg" alt="Image" class="data-image">
             <p>
                 The review is transformed again in a similar way as the last LightGBM model and it again looks like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation9.jpg" alt="Image" class="data-image">
             <p>
                 Ensemble models combine predictions from multiple base models to improve overall performance by leveraging the strengths of each model. 
                 We implemented a stacking ensemble model, which:
@@ -440,7 +440,7 @@
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation12.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 93%</li>
@@ -469,7 +469,7 @@
             <p>
                 After tuning and choosing threshold of 0.7, we got the following results:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation13.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 93%</li>
@@ -507,11 +507,11 @@
             <p>
                 We make an ensemble model by bagging the LightGBM Classifier and try to model the same relationship. The dataset is the same which looks like this after scaling:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation7.jpg" alt="Image" class="data-image">
             <p>
                 The review is transformed again in a similar way as the last ensemble model and it again looks like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation9.jpg" alt="Image" class="data-image">
             <p>
                 Bagging (Bootstrap Aggregating) combines multiple instances of a base model to reduce variance and improve stability. 
                 Each base model is trained on a random subset of the data (with replacement), and predictions are aggregated to produce the final result.
@@ -546,7 +546,7 @@
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation14.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 88%</li>
@@ -575,7 +575,7 @@
             <p>
                 After tuning and choosing threshold of 0.4, we got the following results:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation15.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 91%</li>
