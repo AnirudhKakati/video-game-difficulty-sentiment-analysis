@@ -894,7 +894,7 @@
                 </ul>
             </p>
             <p>
-                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the best results
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.7 gave the best results
             </p>
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
@@ -965,8 +965,125 @@
         
         <section id="Ensemble LightGBM, LR, NB Model 2">
             <h3>9. Ensemble Stacking Model using LightGBM, Logistic Regression and Naïve Bayes with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
-        </section>
-
+            <p>
+                We will now use an ensemble model of LightGBM, Logistic Regression and Naïve Bayes to model the same relationship.
+                This stacking ensemble model combines the predictions of three base models—LightGBM, Logistic Regression, and Gaussian Naive Bayes—to predict whether a review mentions difficulty (mentions_difficulty). 
+                The final meta-model uses Logistic Regression to combine the predictions from the base models for better overall performance
+            </p>
+            <p>
+                The input dataset looks like this again:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                After being normalized it looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The output classes are imbalanced. They look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                We use both undersampling and oversampling and the data now looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                Our base models were the following:
+                <ul>
+                    <li>LightGBMClassifier: Handles complex patterns and class imbalance with class_weight='balanced'</li>
+                    <li>Logistic Regression: A simple linear model to handle linearly separable patterns</li>
+                    <li>Gaussian Naive Bayes: A probabilistic model effective with sparse and conditionally independent features</li>
+                </ul>
+            </p>
+            <p>
+                Logistic Regression combines the predictions of the base models, using 3-fold cross-validation (cv=3) to ensure robust training
+            </p>
+            <p>
+                Hyperparameter tuning was conducted using GridSearchCV to optimize the stacking model:
+                <ul>
+                    <li> LightGBM Parameters: <br>
+                        <ul>
+                            <li>n_estimators: [100, 150] (Number of trees)</li>
+                            <li>max_depth: [4, 6] (Tree depth)</li>
+                            <li>learning_rate: [0.05, 0.1] (Step size)</li>
+                        </ul>
+                    </li>
+                    <li> Meta-Model Parameter: <br>
+                        <ul>
+                            <li>C: [0.1, 1, 10] (Regularization strength for Logistic Regression)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the best results
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 75%</li>
+                    <li>F1 Score: 79% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 84%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 33%</li>
+                                    <li>Recall: 75%</li>
+                                    <li>F1 Score: 46%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 87%, Recall = 76%, F1-Score = 79%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.7, we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 88%</li>
+                    <li>F1 Score: 87% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 91%</li>
+                                    <li>Recall: 95%</li>
+                                    <li>F1 Score: 93%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 58%</li>
+                                    <li>Recall: 43%</li>
+                                    <li>F1 Score: 49%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 87%, Recall = 88%, F1-Score = 87%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Initially, the model showed decent performance for Class 0, with an F1-score of 84%, but struggled significantly with Class 1, achieving only 46% due to low precision (33%). 
+                The overall accuracy of 76% and a weighted F1-score of 79% indicated a clear imbalance in handling the two classes, with the minority class being poorly identified.
+                After hyperparameter tuning and adjusting the threshold to 0.8, the model achieved better balance. 
+                Precision for Class 1 improved significantly to 58%, although recall decreased to 43%, resulting in a slightly improved F1-score of 49%. 
+                Class 0 maintained robust performance, with an F1-score of 93% due to high precision (91%) and recall (95%). 
+                The overall accuracy increased to 88%, and the weighted F1-score rose to 87%.
+            </p>
+        
 
 
         
