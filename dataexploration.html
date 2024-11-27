@@ -398,6 +398,7 @@
                     <li>Negative: Proportion of negative words</li>
                     <li>Compound: A single aggregated score that represents the overall sentiment of the text</li>
                 </ul>
+                <br>
                 For each review in the review column, we applied sia.polarity_scores(x) to compute sentiment scores. 
                 We selected the compound score, which is a normalized value between -1 (most negative) and 1 (most positive). 
                 This value is stored as the new column “sentiment_score”. The data looks like this now:
