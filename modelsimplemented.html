@@ -428,7 +428,7 @@
                 The meta-model was trained on the combined predictions to make the final decision
             </p>
             <p>
-                Hyperparameter Tuning; To further optimize the stacking model, we performed hyperparameter tuning using grid search. 
+                Hyperparameter Tuning: To further optimize the stacking model, we performed hyperparameter tuning using grid search. 
                 The grid search used 3-fold cross-validation and was optimized for the weighted F1-score. The following following parameters were tuned:
                 <ul>
                     <li> LightGBM Parameters<br>
@@ -444,6 +444,8 @@
                         </ul>
                     </li>
                 </ul>
+            </p>
+            <p>
                 We will also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the most optimal results so we choose this.
             </p>
             <p>
@@ -511,13 +513,118 @@
             </p>
         </section>
         
+        <section id="Bagging with LightGBM Model ">
+            <h3>5. Bagging Model using LightGBM Classifier with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+            <p>
+                We make an ensemble model by bagging the LightGBM Classifier and try to model the same relationship. The dataset is the same which looks like this after scaling:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The review is transformed again in a similar way as the last ensemble model and it again looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                Bagging (Bootstrap Aggregating) combines multiple instances of a base model to reduce variance and improve stability. 
+                Each base model is trained on a random subset of the data (with replacement), and predictions are aggregated to produce the final result.
+            </p>
+            <p>
+                We implemented a BaggingClassifier using LightGBM as the base estimator. It has the following key parameters:
+                <uL>
+                    <li>Base Estimator: LightGBM (class_weight='balanced', random_state=42) to handle class imbalance and capture complex relationships</li>
+                    <li> Bagging Parameters: <br>
+                        <ul>
+                            <li>n_estimators: Number of base models</li>
+                            <li>max_samples: Fraction of training samples used by each base model</li>
+                            <li>max_features: Fraction of features used by each base model</li>
+                        </ul>
+                    </li>
+                </uL>
+            </p>
+            <p>
+                To optimize the BaggingClassifier, we performed hyperparameter tuning using grid search on a small search space to maintain efficiency. 
+                The grid search used 3-fold cross-validation and was optimized for the weighted F1-score. All 3 parameters are tuned:
+                <uL>
+                    <li>n_estimators: [5, 10]</li>
+                    <li>max_samples: [0.6, 0.8]</li>
+                    <li>max_features: [0.6, 0.8] </li>
+                </uL>
+            </p>
+            <p>
+                After training the BaggingClassifier with the best parameters, 
+                we will also do threshold adjustment from 0.1 to 0.9. 
+                A threshold value of 0.4 gave the most optimal results so we choose this.
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 88%</li>
+                    <li>F1 Score: 89% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 43%</li>
+                                    <li>Recall: 74%</li>
+                                    <li>F1 Score: 55%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 97%</li>
+                                    <li>Recall: 89%</li>
+                                    <li>F1 Score: 93%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 92%, Recall = 88%, F1-Score = 89%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.4, we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 91%</li>
+                    <li>F1 Score: 91% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 55%</li>
+                                    <li>Recall: 58%</li>
+                                    <li>F1 Score: 57%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 95%</li>
+                                    <li>F1 Score: 95%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 91%, Recall = 91%, F1-Score = 91%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                The BaggingClassifier model initially performed reasonably well, achieving an accuracy of 88% and a weighted F1-score of 89%. However, Class 0 (negative reviews) had a low F1-score of 55% due to its relatively low precision (43%) and moderate recall (74%). After hyperparameter tuning and adjusting the threshold to 0.4, the model showed an improvement in balancing performance for Class 0. Precision for Class 0 increased to 55%, while recall descreased to 58%, resulting in a better F1-score of 57%. The performance for Class 1 (positive reviews) remained strong, with a precision and recall of 95%. 
+                The overall accuracy increased to 91%, and the macro-average F1-score rose to 76%, reflecting a better balance between the two classes. 
+            </p>
+            
+        </section>
+
+
+
 
 
 
         
-        <section id="Bagging with LightGBM Model ">
-            <h3>5. Bagging Model using LightGBM Classifier with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
-        </section>
         <section id="LightGBM Classifier Model 2">
             <h3>6. LightGBM Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
         </section>
