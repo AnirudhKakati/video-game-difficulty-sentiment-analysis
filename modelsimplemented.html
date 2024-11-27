@@ -618,6 +618,116 @@
             </p>
             
         </section>
+        
+        <section id="LightGBM Classifier Model 2">
+            <h3>6. LightGBM Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+            <p>
+                We will try to predict if a review mentions difficulty using review meta data like length and sentiment score. 
+                We will try to model review_length and sentiment_score to mentions_difficulty
+            </p>
+            <p>
+                This model aimed to predict whether a review mentions difficulty (mentions_difficulty) using two features: review_length and sentiment_score. 
+                Given the significant imbalance in the target variable, with far fewer reviews mentioning difficulty, a combination of under-sampling and over-sampling techniques was used to create a balanced training dataset.
+            </p>
+            <p>
+                Our Input dataset will initially look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                Both the numerical columns are scaled and they look like this now:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The output classes are imbalanced. They look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                We use both undersampling and oversampling and the data now looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The LightGBMClassifier was used for training, leveraging its ability to handle class imbalance with the class_weight='balanced' parameter. 
+                Hyperparameter tuning was conducted using GridSearchCV, with 3 fold cross validation, to optimize the following parameters with respect to F1 score:
+                <uL>
+                    <li>n_estimators: Number of boosting rounds ([50, 100])</li>
+                    <li>max_depth: Maximum depth of each decision tree ([3, 5])</li>
+                    <li>learning_rate: Learning rate for boosting ([0.05, 0.1])</li>
+                    <li>colsample_bytree: Fraction of features used for each tree ([0.8, 1.0])</li>
+                </uL>
+            </p>
+            <p>
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.7 gave the best results
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 76%</li>
+                    <li>F1 Score: 80% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 85%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 34%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 47%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 87%, Recall = 76%, F1-Score = 80%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.7, we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 87%</li>
+                    <li>F1 Score: 87% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 92%</li>
+                                    <li>Recall: 93%</li>
+                                    <li>F1 Score: 92%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 52%</li>
+                                    <li>Recall: 48%</li>
+                                    <li>F1 Score: 50%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 86%, Recall = 87%, F1-Score = 87%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After hyperparameter tuning and threshold adjustment, the LightGBM model demonstrated improved balance between the two classes. 
+                Initially, the model achieved an accuracy of 76% and a weighted F1-score of 80%, but struggled to identify Class 1 (minority class), with a low precision of 34% and a moderate recall of 76%, resulting in an F1-score of 47%. 
+                By tuning hyperparameters and adjusting the decision threshold to 0.7, the model significantly improved its performance for Class 1, with precision increasing to 52%. 
+                However, recall for Class 1 dropped to 48%, resulting in a slightly better F1-score of 50%. For Class 0, both precision and recall improved to 92% and 93%, respectively, ensuring robust performance for the majority class. 
+                The overall accuracy rose to 87%, with a weighted average F1-score of 87%, reflecting a better balance between classes while maintaining high accuracy.  
+            </p>
+        </section>
+
+
+
+
 
 
 
@@ -625,9 +735,6 @@
 
 
         
-        <section id="LightGBM Classifier Model 2">
-            <h3>6. LightGBM Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
-        </section>
         <section id="XGBoost Classifier Model ">
             <h3>7. XGBoost Classifier Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
         </section>
