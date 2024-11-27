@@ -58,11 +58,16 @@
                 We will first load in our featured_reviews.csv into a dataframe. We take our “review” feature as X or our input and take “voted_up” as y or our output. 
                 The data initially looks like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation2.jpg" alt="Image" class="data-image">
             <p>
-                BERT model first tokenizes this text data before training. The tokenized transformed data looks like this:
+                BERT model first tokenizes this text data before training. Before tokenizing our data looked like this
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation3.jpg" alt="Image" class="data-image">
+            <p>    
+                The tokenized transformed data looks like this:
+            </p>
+            <img src="images/modelimplementation4.jpg" alt="Image" class="data-image">
             <p>
                 Our processing involves the following steps:
                 <ul>
@@ -102,7 +107,7 @@
             <p>
                 After training the BERT model, we evaluated it on the test set. Below are the results:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation5.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 93%</li>
@@ -142,34 +147,18 @@
         <section id="BERT model 2">
             <h3>2. BERT Transformer Model with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
             <p>
-                Text reviews (review) contain detailed feedback, but their raw form is difficult for machine learning models to interpret directly. 
-                By extracting a sentiment score, we provide a numerical representation of the review’s polarity, making it easier for the model to process
-            </p>
-            <p>
-                VADER (Valence Aware Dictionary and sEntiment Reasoner) is a pre-trained rule-based sentiment analysis tool from the NLTK library, designed to handle social media text and other short reviews
-            </p>
-            <p>
-                It provides four sentiment scores for a given text:
-                <uL>
-                    <li>Positive: Proportion of positive words</li>
-                    <li>Neutral: Proportion of neutral words</li>
-                    <li>Negative: Proportion of negative words</li>
-                    <li>Compound: A single aggregated score that represents the overall sentiment of the text</li>
-                </uL>
-            </p>
-            <p>
-                For each review in the review column, we applied sia.polarity_scores(x) to compute sentiment scores. 
-                We selected the compound score, which is a normalized value between -1 (most negative) and 1 (most positive). 
-                This value is stored as the new column “sentiment_score”.
-            </p>
-            <p>
+                We make another BERT transfomer model but incorporate two more numerical features along with the review column.
                 We take “review”, “review_length” and “sentiment_score” as our input X and “voted_up” as our output y. Our data looks like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation6.jpg" alt="Image" class="data-image">
             <p>
                 The numerical columns are normalized by min-max scaling. The data now looks like this:
             <p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <p>
+                The review column is tokenized in the same manner as the previous and looks like this after transformation again:
+            </p>
+            <img src="images/modelimplementation4.jpg" alt="Image" class="data-image">
             <p>
                 The processing steps are similar to the previous model: <br>
                 <ul>
@@ -217,7 +206,7 @@
             <p>
                 After training this new BERT model, we evaluated it on the test set. Below are the results:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation8.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 93%</li>
@@ -254,11 +243,11 @@
             <p>
                 We will now use a LightGBM classifier model to try to model the same relationship. The data looks like this again:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation6.jpg" alt="Image" class="data-image">
             <p>
                 The numerical columns are again normalized and the data looks like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation7.jpg" alt="Image" class="data-image">
             <p>
                 The review data is transformed for it to work with our classifier model. 
                 The transformation involves converting raw review text into numerical features using TF-IDF (Term Frequency-Inverse Document Frequency). 
@@ -279,7 +268,7 @@
             <p>
                 The transformed data looks like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation9.jpg" alt="Image" class="data-image">
             <p>
                 We used LightGBM (LGBMClassifier), a gradient boosting framework that is highly efficient for handling large datasets and sparse matrices (like our TF-IDF + numerical features). 
                 The model was initialized with the parameter class_weight="balanced" to handle class imbalance between positive (voted_up=1) and negative (voted_up=0) reviews.
