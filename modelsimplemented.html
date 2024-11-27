@@ -841,14 +841,135 @@
             </p>
         </section>
 
-
-        
         <section id="Ensemble XGBoost, LR, NB Model ">
             <h3>8. Ensemble Stacking Model using XGBoost Classifier, Logistic Regression and Naïve Bayes with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+            <p>
+                We will now use an ensemble model of XGBoost, Logistic Regression and Naïve Bayes to model the same relationship.
+                This model combines the predictions from multiple base models using a stacking ensemble to predict whether a review mentions difficulty (mentions_difficulty). 
+                The stacking approach leverages diverse models to improve overall performance.
+            </p>
+            <p>
+                The input dataset looks like this again:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                After being normalized it looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The output classes are imbalanced. They look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                We use both undersampling and oversampling and the data now looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                Our base models were the following:
+                <ul>
+                    <li>XGBoost (XGBClassifier): A gradient boosting model configured to handle class imbalance (scale_pos_weight=2) and capture complex relationships</li>
+                    <li>Logistic Regression: A simple linear model to handle linearly separable patterns</li>
+                    <li>Gaussian Naive Bayes: A probabilistic model effective with sparse and conditionally independent features</li>
+                </ul>
+            </p>
+            <p>
+                Logistic Regression was used as the meta model to learn how to combine predictions from the base models. 
+                3-fold cross-validation (cv=3) ensured robust training of the meta-model
+            </p>
+            <p>
+                Hyperparameter tuning was conducted using GridSearchCV to optimize the stacking model:
+                <ul>
+                    <li> XGBoost Parameters: <br>
+                        <ul>
+                            <li>n_estimators: [100, 150] (Number of trees)</li>
+                            <li>max_depth: [4, 6] (Tree depth)</li>
+                            <li>learning_rate: [0.05, 0.1] (Step size)</li>
+                        </ul>
+                    </li>
+                    <li> Meta-Model Parameter: <br>
+                        <ul>
+                            <li>C: [0.1, 1, 10] (Regularization strength for Logistic Regression)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the best results
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 75%</li>
+                    <li>F1 Score: 79% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 84%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 33%</li>
+                                    <li>Recall: 75%</li>
+                                    <li>F1 Score: 46%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 86%, Recall = 75%, F1-Score = 79%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.7, we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 85%</li>
+                    <li>F1 Score: 85% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 92%</li>
+                                    <li>Recall: 90%</li>
+                                    <li>F1 Score: 91%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 46%</li>
+                                    <li>Recall: 53%</li>
+                                    <li>F1 Score: 49%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 86%, Recall = 85%, F1-Score = 85%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Initially, the model achieved decent results for Class 0, with an F1-score of 84%, but struggled significantly with Class 1, where the F1-score was only 46% due to low precision (33%). 
+                The overall accuracy of 75% highlighted the model's difficulty in handling the minority class, despite reasonable performance for the majority class.
+                After hyperparameter tuning and adjusting the threshold to 0.7, the model's balance between the two classes improved. 
+                For Class 1, precision increased to 46%, and recall to 53%, leading to a slightly better F1-score of 49%. Class 0 maintained strong performance, with an F1-score of 91%. 
+                The overall accuracy increased to 85%, and the weighted average F1-score improved to 85%, showing better class balance while preserving good performance for the dominant class
+            </p>
         </section>
+        
         <section id="Ensemble LightGBM, LR, NB Model 2">
             <h3>9. Ensemble Stacking Model using LightGBM, Logistic Regression and Naïve Bayes with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
         </section>
+
+
+
+        
         <section id="DT Classifier Model ">
             <h3>10. Decision Tree Model with genre data as input and "mentions_difficulty" as output</h3>
         </section>
