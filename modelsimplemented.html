@@ -297,28 +297,28 @@
                 The steps were the following:
                 <ul>
                     <li>Obtained prediction probabilities using model.predict_proba</li>
-                    <li>Tested thresholds ranging from 0.1 to 0.6</li>
+                    <li>Tested thresholds ranging from 0.1 to 0.9</li>
                     <li>Evaluated metrics (precision, recall, F1-score) for each threshold</li>
                 </ul>
                 By lowering the threshold we improved recall for class 0 (negative reviews), reducing false negatives. 
                 But by increasing the threshold precision for class 1 (positive reviews) improved, which reduced false positives.
-                To balance both out, a threshold value of 0.2 was chosen.
+                To balance both out, a threshold value of 0.3 was chosen.
             </p>
             <p>
                 The results before hyperparameter tuning and threshold adjustment are the following:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation10.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
-                    <li>Accuracy: 87%</li>
+                    <li>Accuracy: 86%</li>
                     <li>F1 Score: 88% (Weighted Average)</li>
                     <li>Classification Report: <br>
                         <ul type="o">
                             <li>Class 0 (Negative reviews): <br>
                                 <ul>
                                     <li>Precision: 40%</li>
-                                    <li>Recall: 76%</li>
-                                    <li>F1 Score: 53%</li>
+                                    <li>Recall: 74%</li>
+                                    <li>F1 Score: 52%</li>
                                 </ul>
                             </li>
                             <li>Class 1 (Positive reviews): <br>
@@ -328,7 +328,7 @@
                                     <li>F1 Score: 92%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 92%, Recall = 87%, F1-Score = 88%</li>
+                            <li>Weighted Average: Precision = 91%, Recall = 86%, F1-Score = 88%</li>
                         </ul>
                     </li>
                 </ul>
@@ -336,7 +336,7 @@
             <p>
                 After tuning and threshold adjust, the following were the results:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation11.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 91%</li>
@@ -345,9 +345,9 @@
                         <ul type="o">
                             <li>Class 0 (Negative reviews): <br>
                                 <ul>
-                                    <li>Precision: 56%</li>
-                                    <li>Recall: 56%</li>
-                                    <li>F1 Score: 56%</li>
+                                    <li>Precision: 53%</li>
+                                    <li>Recall: 54%</li>
+                                    <li>F1 Score: 54%</li>
                                 </ul>
                             </li>
                             <li>Class 1 (Positive reviews): <br>
