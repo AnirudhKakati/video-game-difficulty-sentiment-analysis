@@ -725,19 +725,124 @@
             </p>
         </section>
 
-
-
-
-
-
-
-
+        <section id="XGBoost Classifier Model ">
+            <h3>7. XGBoost Classifier Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+            <p>
+                We will now use an XGBoost Classifier model to try to model the same relationship as the last one. 
+                This model aims to predict whether a review mentions difficulty (mentions_difficulty) using features like review_length and sentiment_score. 
+                To handle the class imbalance, a combination of under-sampling and SMOTE was applied to create a balanced training dataset, followed by training an XGBoostClassifier optimized through hyperparameter tuning.
+            </p>
+            <p>
+                The input dataset looks like this again:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                After being normalized it looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                The output classes are imbalanced. They look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                We use both undersampling and oversampling and the data now looks like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                An XGBoostClassifier was used for training. The following default parameters were applied:
+                <ul>
+                    <li>scale_pos_weight: Adjusted to account for residual class imbalance in the resampled data</li>
+                    <li>n_estimators: Set to 200, representing the number of boosting rounds</li>
+                    <li>learning_rate: A step size of 0.1 for gradual learning</li>
+                    <li>max_depth: Limited to 6 to balance complexity and prevent overfitting</li>
+                    <li>subsample: Randomly sampled 80% of training data for each tree to improve model robustness</li>
+                    <li>colsample_bytree: Randomly sampled 80% of features for each tree to reduce correlation</li>
+                </ul>
+            </p>
+            <p>
+                Hyperparameter tuning was conducted using GridSearchCV, with 3 fold cross validation, and all the parameters were optimized with respect to F1 Score:
+                <ul>
+                    <li>n_estimators: [100, 200]</li>
+                    <li>learning_rate: [0.05, 0.1].</li>
+                    <li>max_depth: [4, 6].</li>
+                    <li>subsample: [0.8, 1.0].</li>
+                    <li>colsample_bytree: [0.8, 1.0].</li>
+                </ul>
+            </p>
+            <p>
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the best results
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 67%</li>
+                    <li>F1 Score: 72% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 96%</li>
+                                    <li>Recall: 64%</li>
+                                    <li>F1 Score: 77%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 27%</li>
+                                    <li>Recall: 84%</li>
+                                    <li>F1 Score: 41%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 87%, Recall = 67%, F1-Score = 72%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.8, we got the following results:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 86%</li>
+                    <li>F1 Score: 86% (Weighted Average)</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 92%</li>
+                                    <li>Recall: 91%</li>
+                                    <li>F1 Score: 92%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 48%</li>
+                                    <li>Recall: 51%</li>
+                                    <li>F1 Score: 49%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 86%, Recall = 86%, F1-Score = 86%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Initially, the XGBoost model performed moderately well for Class 0, with a precision of 96% and an F1-score of 77%. 
+                However, it struggled with Class 1, achieving only 27% precision despite a recall of 84%, resulting in a low F1-score of 41%. 
+                The overall accuracy was 67%, indicating difficulty in balancing the two classes.
+                After hyperparameter tuning and threshold adjustment (threshold = 0.8), the model showed improved balance. 
+                Class 1 precision increased to 48%, with recall at 51%, leading to a slightly better F1-score of 49%. 
+                Class 0 maintained stable performance, with a precision of 92% and recall of 91%, resulting in an F1-score of 92%. 
+                The overall accuracy rose to 86%, and the weighted average F1-score improved to 86%, reflecting better handling of the minority class without sacrificing much performance for the majority class
+            </p>
+        </section>
 
 
         
-        <section id="XGBoost Classifier Model ">
-            <h3>7. XGBoost Classifier Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
-        </section>
         <section id="Ensemble XGBoost, LR, NB Model ">
             <h3>8. Ensemble Stacking Model using XGBoost Classifier, Logistic Regression and Naïve Bayes with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
         </section>
