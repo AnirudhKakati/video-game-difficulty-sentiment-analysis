@@ -1084,18 +1084,65 @@
                 The overall accuracy increased to 88%, and the weighted F1-score rose to 87%.
             </p>
         
-
-
-        
         <section id="DT Classifier Model ">
-            <h3>10. Decision Tree Model with genre data as input and "mentions_difficulty" as output</h3>
+            <h3>10. Decision Tree, Random Forest and Logistic Regression Models with genre data as input and "mentions_difficulty" as output</h3>
+            <p>
+                For the next models we will try to predict the relationship between genres and the mentions of difficulty. 
+                We will use all our one hot encoded genre columns ('roguelike', 'co_op', 'base_building', 'soulslike', 'deckbuilding', 'puzzle', 'metroidvania', 'rpg', 'competitive', 'first_person', 'crpg', 'multiplayer', 'action', 'sandbox', 'fantasy', 'simulation', 'platformer', 'shooter', 'open_world', 'strategy', 'survival', 'adventure', 'crafting', 'third_person', 'turn_based', '2d')
+                as input and "mentions_difficulty" as output.
+            </p>
+            <p>
+                The output class is imabalanced and the counts look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                We use SMOTE oversampling. The new counts look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                We first implemented a Decision tree model with and then a Random Forest model both with the parameter class_weight="balanced" and other default parameters.
+                Next we implement a Logistic Regression Model with max_iter=1000. 
+                All 3 models gave identical results which look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                Hyperparameter tuning was done for all 3 of them:
+                <ul>
+                    <li> Decision Tree: <br>
+                        <ul>
+                            <li>criterion: ['gini', 'entropy']</li> 
+                            <li>max_depth: [5, 10, 15, None]</li>  
+                            <li>min_samples_split: [2, 5, 10]</li>  
+                            <li>min_samples_leaf: [1, 5]</li>  
+                        </ul>
+                    </li>
+                    <li> Random Forest <br>
+                        <ul>
+                            <li>n_estimators: [100, 200]</li> 
+                            <li>max_depth: [5, 10, 15, None]</li>  
+                            <li>min_samples_split: [2, 5, 10]</li>  
+                            <li>min_samples_leaf: [1, 5]</li>  
+                            <li>max_features: ['sqrt', 'log2']</li>  
+                        </ul>
+                    </li>
+                    <li> Logistic Regression: <br>
+                        <ul>
+                            <li>C: [0.01, 0.1, 1, 10, 100]</li> 
+                            <li>penalty: ['l1','l2']</li>  
+                            <li>solver: ['liblinear', 'saga']</li>  
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Even after tuning, all 3 models yieled exact same results again, same as the ones before. These look like this:
+            </p>
+            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <p>
+                Since it produces nearly identical results with all three models, even after tuning, we can conclude that there isn't strong enough evidence in the data to model the mentioned relationship
+            </p>
         </section>
-        <section id="RF Classifier Model ">
-            <h3>11. Random Forest Model with genre data as input and "mentions_difficulty" as output</h3>
-        </section>
-        <section id="LR Classifier Model ">
-            <h3>12. Logistic Regression Model with genre data as input and "mentions_difficulty" as output</h3>
-        </section>
+            
     </main>
 
     <footer>
