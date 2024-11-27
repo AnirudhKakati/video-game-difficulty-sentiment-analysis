@@ -305,7 +305,7 @@
                 We use the nltk package to get a set of stop words. Stop words are frequently used words (like "and," "the," "is") that generally do not add significant meaning to text analysis. 
                 We will remove these words from our review. The review column now looks like this:
             </p>
-            <img src="images/data.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering1.jpg" alt="image" class="data-image">
             <p>
                 We will define a set of words which are commonly used to express difficulty in the gaming world. These include: <br>
                 'formidable', 'galaxybrain', 'merciless', 'tiresome', 'impossible', 
@@ -326,7 +326,7 @@
                 We will also derive a new feature called review length by taking the length of the review column.
                 The data after these features are added looks like this:
             </p>
-            <img src="images/data.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering2.jpg" alt="image" class="data-image">
             <p>
                 Next, we will define a mapping with games and a list of its genres. Using this we would be creating a new feature for genres. 
                 The genre mapping for each game is the following:
@@ -373,7 +373,7 @@
                 We will initialize everything to 0 first and then for every game whichever genres were mapped, those columns are made 1.
                 The new data looks like has these new features now:
             </p>
-            <img src="images/data.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering3.jpg" alt="image" class="data-image">
             <p>
                 We will extract another feature which classified players as “beginner”, “intermediate” or “experienced”. 
                 For the specific game mentioned in the review, we will classify it as beginner if the author’s playtime is lower than the lower quartile playtime for that game. 
@@ -382,11 +382,11 @@
                 For other cases, they are classified as intermediate. 
                 It looks like this:
             </p>
-            <img src="images/data.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering4.jpg" alt="image" class="data-image">
             <p>
                 We will one hot encode this column. The new data looks like this:
             </p>
-            <img src="images/data.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering5.jpg" alt="image" class="data-image">
             <p>
                 Text reviews (review) contain detailed feedback, but their raw form is difficult for machine learning models to interpret directly. 
                 By extracting a sentiment score, we provide a numerical representation of the review’s polarity, making it easier for the model to process.
@@ -402,11 +402,11 @@
                 We selected the compound score, which is a normalized value between -1 (most negative) and 1 (most positive). 
                 This value is stored as the new column “sentiment_score”. The data looks like this now:
             </p>
-            <img src="images/data.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering6.jpg" alt="image" class="data-image">
             <p>
                 This processsed dataset ready to be implemented into models finally looks like this:
             </p>
-            <img src="images/data.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering7.jpg" alt="image" class="data-image">
             <p>
                 We save this updated dataset to a csv file. 
                 For a detailed walkthrough of our feature engineering process, you can view our 
