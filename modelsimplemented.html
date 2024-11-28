@@ -1081,19 +1081,23 @@
                 as input and "mentions_difficulty" as output.
             </p>
             <p>
+                Our input data looks like this:
+            </p>
+            <img src="images/modelimplementation28.jpg" alt="Image" class="data-image">
+            <p>
                 The output class is imabalanced and the counts look like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation29.jpg" alt="Image" class="data-image">
             <p>
                 We use SMOTE oversampling. The new counts look like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation30.jpg" alt="Image" class="data-image">
             <p>
                 We first implemented a Decision tree model with and then a Random Forest model both with the parameter class_weight="balanced" and other default parameters.
                 Next we implement a Logistic Regression Model with max_iter=1000. 
                 All 3 models gave identical results which look like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation31.jpg" alt="Image" class="data-image">
             <p>
                 Hyperparameter tuning was done for all 3 of them:
                 <ul>
@@ -1126,7 +1130,7 @@
             <p>
                 Even after tuning, all 3 models yield exact same results again, same as the ones before. These look like this:
             </p>
-            <img src="images/model1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation32.jpg" alt="Image" class="data-image">
             <p>
                 Since it produces nearly identical results with all three models, even after tuning, we can conclude that there isn't strong enough evidence in the data to model the mentioned relationship
             </p>
