@@ -56,11 +56,22 @@
         </section>
 
         <section id="summary-of-results">
-            <h3>Summary of Results</h3>
+            <h3>Summary of Modelling Results</h3>
             <h4>Accuracy of the Models</h4>
             <img src="images/summary1.jpg" alt="Image" class="data-image">
+            <p>
+                This chart highlights the overall accuracy of the models used in the project. 
+                The highest accuracy (93%) was achieved by several models, including the BERT-based models and ensemble stacking models for predicting whether a review is positive. 
+                However, the genre-based models for predicting difficulty mentions struggled, with an accuracy of just 57%, underscoring the challenge of modeling this relationship.
+            </p>
             <h4>Class Specific and Macro Average F1 Scores</h4>
             <img src="images/summary2.jpg" alt="Image" class="data-image">
+            <p>
+                The grouped bar chart provides a deeper look into the models' performance for individual classes (Class 0: Negative/No Difficulty Mention and Class 1: Positive/Difficulty Mention) and their macro-average F1 scores. 
+                While the majority class showed strong F1 scores (up to 96%), 
+                The minority class often lagged behind, with F1 scores as low as 30% for some tasks. 
+                This discrepancy highlights the impact of class imbalance and the need for more nuanced modeling approaches.
+            </p>
         </section>
         
         <section id="addressing-research-questions">
