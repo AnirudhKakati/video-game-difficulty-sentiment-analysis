@@ -129,7 +129,7 @@
                                     <li>F1 Score: 96%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 94%, Recall = 93%, F1-Score = 94%</li>
+                            <li>Macro Average: Precision = 81%, Recall = 82%, F1-Score = 82%</li>
                         </ul>
                     </li>
                 </ul>
@@ -228,7 +228,7 @@
                                     <li>F1 Score: 96%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 93%, Recall = 93%, F1-Score = 93%</li>
+                            <li>Macro Average: Precision = 82%, Recall = 80%, F1-Score = 81%</li>
                         </ul>
                     </li>
                 </ul>
@@ -329,7 +329,7 @@
                                     <li>F1 Score: 92%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 91%, Recall = 86%, F1-Score = 88%</li>
+                            <li>Macro Average: Precision = 68%, Recall = 81%, F1-Score = 72%</li>
                         </ul>
                     </li>
                 </ul>
@@ -358,7 +358,7 @@
                                     <li>F1 Score: 95%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 91%, Recall = 91%, F1-Score = 91%</li>
+                            <li>Macro Average: Precision = 74%, Recall = 74%, F1-Score = 74%</li>
                         </ul>
                     </li>
                 </ul>
@@ -366,7 +366,7 @@
             <p>
                 After hyperparameter tuning and threshold adjustment, the LightGBM model showed improvements in balancing precision and recall for Class 0 (negative reviews). 
                 Precision and recall for Class 0 became 53% and 54%, raising the F1-score from 52% to 54%. Class 1 (positive reviews) maintained strong performance, with an F1-score of 95%, and the overall accuracy increased from 86% to 91%. 
-                While the model successfully enhanced detection of negative reviews, the F1-score for Class 0 remains moderate due to class imbalance. The weighted F1-score improved to 91%. 
+                While the model successfully enhanced detection of negative reviews, the F1-score for Class 0 remains moderate due to class imbalance. The macro average F1-score improved to 74%. 
                 These results indicate that the tuning effectively balanced performance between classes, though further techniques might be required to address residual challenges in negative review detection.
             </p>
         </section>
@@ -462,7 +462,7 @@
                                     <li>F1 Score: 96%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 93%, Recall = 93%, F1-Score = 93%</li>
+                            <li>Macro Average: Precision = 85%, Recall = 75%, F1-Score = 79%</li>
                         </ul>
                     </li>
                 </ul>
@@ -491,13 +491,13 @@
                                     <li>F1 Score: 96%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 93%, Recall = 93%, F1-Score = 93%</li>
+                            <li>Macro Average: Precision = 81%, Recall = 79%, F1-Score = 80%</li>
                         </ul>
                     </li>
                 </ul>
             </p>
             <p>
-                The stacking ensemble model initially performed well, achieving a weighted F1-score of 93% and high precision and recall for Class 1 (positive reviews). 
+                The stacking ensemble model initially performed decent, achieving a macro F1-score of 79% and high precision and recall for Class 1 (positive reviews). 
                 However, Class 0 (negative reviews) struggled with a low recall of 51% and an F1-score of 61%, indicating room for improvement in identifying negative reviews. 
                 After hyperparameter tuning and adjusting the decision threshold to 0.7, the model showed a better balance for Class 0, with precision improving from 75% to 65% and recall increasing from 51% to 62%. Although the F1-score for Class 0 rose marginally to 63%, the performance for Class 1 remained robust, with a precision and recall of 96%. Overall accuracy remained consistent at 93%, and the macro-average F1-score improved slightly, indicating that threshold adjustment effectively enhanced the model's ability to identify negative reviews without sacrificing the performance for positive reviews
             </p>
@@ -568,7 +568,7 @@
                                     <li>F1 Score: 93%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 92%, Recall = 88%, F1-Score = 89%</li>
+                            <li>Macro Average: Precision = 70%, Recall = 82%, F1-Score = 74%</li>
                         </ul>
                     </li>
                 </ul>
@@ -597,13 +597,16 @@
                                     <li>F1 Score: 95%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 91%, Recall = 91%, F1-Score = 91%</li>
+                            <li>Macro Average: Precision = 75%, Recall = 77%, F1-Score = 76%</li>
                         </ul>
                     </li>
                 </ul>
             </p>
             <p>
-                The BaggingClassifier model initially performed reasonably well, achieving an accuracy of 88% and a weighted F1-score of 89%. However, Class 0 (negative reviews) had a low F1-score of 55% due to its relatively low precision (43%) and moderate recall (74%). After hyperparameter tuning and adjusting the threshold to 0.4, the model showed an improvement in balancing performance for Class 0. Precision for Class 0 increased to 55%, while recall descreased to 58%, resulting in a better F1-score of 57%. The performance for Class 1 (positive reviews) remained strong, with a precision and recall of 95%. 
+                The BaggingClassifier model initially performed reasonably well, achieving an accuracy of 88% and a macro average F1-score of 74%. 
+                However, Class 0 (negative reviews) had a low F1-score of 55% due to its relatively low precision (43%) and moderate recall (74%). 
+                After hyperparameter tuning and adjusting the threshold to 0.4, the model showed an improvement in balancing performance for Class 0. Precision for Class 0 increased to 55%, while recall descreased to 58%, resulting in a better F1-score of 57%. 
+                The performance for Class 1 (positive reviews) remained strong, with a precision and recall of 95%. 
                 The overall accuracy increased to 91%, and the macro-average F1-score rose to 76%, reflecting a better balance between the two classes. 
             </p>
             
@@ -672,7 +675,7 @@
                                     <li>F1 Score: 47%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 87%, Recall = 76%, F1-Score = 80%</li>
+                            <li>Macro Average: Precision = 65%, Recall = 76%, F1-Score = 66%</li>
                         </ul>
                     </li>
                 </ul>
@@ -701,17 +704,17 @@
                                     <li>F1 Score: 50%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 86%, Recall = 87%, F1-Score = 87%</li>
+                            <li>Weighted Average: Precision = 72%, Recall = 71%, F1-Score = 71%</li>
                         </ul>
                     </li>
                 </ul>
             </p>
             <p>
                 After hyperparameter tuning and threshold adjustment, the LightGBM model demonstrated improved balance between the two classes. 
-                Initially, the model achieved an accuracy of 76% and a weighted F1-score of 80%, but struggled to identify Class 1 (minority class), with a low precision of 34% and a moderate recall of 76%, resulting in an F1-score of 47%. 
+                Initially, the model achieved an accuracy of 76% and a macro average F1-score of 66%, but struggled to identify Class 1 (minority class), with a low precision of 34% and a moderate recall of 76%, resulting in an F1-score of 47%. 
                 By tuning hyperparameters and adjusting the decision threshold to 0.7, the model significantly improved its performance for Class 1, with precision increasing to 52%. 
                 However, recall for Class 1 dropped to 48%, resulting in a slightly better F1-score of 50%. For Class 0, both precision and recall improved to 92% and 93%, respectively, ensuring robust performance for the majority class. 
-                The overall accuracy rose to 87%, with a weighted average F1-score of 87%, reflecting a better balance between classes while maintaining high accuracy.  
+                The overall accuracy rose to 87%, with a macro average F1-score of 71%, reflecting a better balance between classes while maintaining high accuracy.  
             </p>
         </section>
 
@@ -786,7 +789,7 @@
                                     <li>F1 Score: 41%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 87%, Recall = 67%, F1-Score = 72%</li>
+                            <li>Macro Average: Precision = 62%, Recall = 74%, F1-Score = 59%</li>
                         </ul>
                     </li>
                 </ul>
@@ -815,7 +818,7 @@
                                     <li>F1 Score: 49%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 86%, Recall = 86%, F1-Score = 86%</li>
+                            <li>Macro Average: Precision = 70%, Recall = 71%, F1-Score = 70%</li>
                         </ul>
                     </li>
                 </ul>
@@ -827,7 +830,7 @@
                 After hyperparameter tuning and threshold adjustment (threshold = 0.8), the model showed improved balance. 
                 Class 1 precision increased to 48%, with recall at 51%, leading to a slightly better F1-score of 49%. 
                 Class 0 maintained stable performance, with a precision of 92% and recall of 91%, resulting in an F1-score of 92%. 
-                The overall accuracy rose to 86%, and the weighted average F1-score improved to 86%, reflecting better handling of the minority class without sacrificing much performance for the majority class
+                The overall accuracy rose to 86%, and the macro average F1-score improved to 70%, reflecting better handling of the minority class without sacrificing much performance for the majority class
             </p>
         </section>
 
@@ -910,7 +913,7 @@
                                     <li>F1 Score: 46%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 86%, Recall = 75%, F1-Score = 79%</li>
+                            <li>Macro Average: Precision = 64%, Recall = 75%, F1-Score = 65%</li>
                         </ul>
                     </li>
                 </ul>
@@ -939,17 +942,17 @@
                                     <li>F1 Score: 49%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 86%, Recall = 85%, F1-Score = 85%</li>
+                            <li>Macro Average: Precision = 69%, Recall = 72%, F1-Score = 70%</li>
                         </ul>
                     </li>
                 </ul>
             </p>
             <p>
-                Initially, the model achieved decent results for Class 0, with an F1-score of 84%, but struggled significantly with Class 1, where the F1-score was only 46% due to low precision (33%). 
+                Initially, the model achieved decent results for Class 0, with an F1-score of 84%, but struggled significantly with Class 1, where the F1-score was only 46% due to low precision of 33%. 
                 The overall accuracy of 75% highlighted the model's difficulty in handling the minority class, despite reasonable performance for the majority class.
                 After hyperparameter tuning and adjusting the threshold to 0.7, the model's balance between the two classes improved. 
                 For Class 1, precision increased to 46%, and recall to 53%, leading to a slightly better F1-score of 49%. Class 0 maintained strong performance, with an F1-score of 91%. 
-                The overall accuracy increased to 85%, and the weighted average F1-score improved to 85%, showing better class balance while preserving good performance for the dominant class
+                The overall accuracy increased to 85%, and the macro average F1-score improved to 70%, showing better class balance while preserving good performance for the dominant class
             </p>
         </section>
         
@@ -1031,7 +1034,7 @@
                                     <li>F1 Score: 46%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 87%, Recall = 76%, F1-Score = 79%</li>
+                            <li>Macro Average: Precision = 64%, Recall = 76%, F1-Score = 65%</li>
                         </ul>
                     </li>
                 </ul>
@@ -1060,18 +1063,18 @@
                                     <li>F1 Score: 49%</li>
                                 </ul>
                             </li>
-                            <li>Weighted Average: Precision = 87%, Recall = 88%, F1-Score = 87%</li>
+                            <li>Macro Average: Precision = 69%, Recall = 72%, F1-Score = 70%</li>
                         </ul>
                     </li>
                 </ul>
             </p>
             <p>
                 Initially, the model showed decent performance for Class 0, with an F1-score of 84%, but struggled significantly with Class 1, achieving only 46% due to low precision (33%). 
-                The overall accuracy of 76% and a weighted F1-score of 79% indicated a clear imbalance in handling the two classes, with the minority class being poorly identified.
+                The overall accuracy of 76% and a macro average F1-score of 65% indicated a clear imbalance in handling the two classes, with the minority class being poorly identified.
                 After hyperparameter tuning and adjusting the threshold to 0.8, the model achieved better balance. 
                 Precision for Class 1 improved significantly to 58%, although recall decreased to 43%, resulting in a slightly improved F1-score of 49%. 
                 Class 0 maintained robust performance, with an F1-score of 93% due to high precision (91%) and recall (95%). 
-                The overall accuracy increased to 88%, and the weighted F1-score rose to 87%.
+                The overall accuracy increased to 88%, and the macro F1-score rose to 70%.
             </p>
         
         <section id="DT Classifier Model ">
