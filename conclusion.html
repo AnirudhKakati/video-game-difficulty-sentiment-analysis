@@ -131,21 +131,39 @@
 
         <section id="potential-use-cases">
             <h3>Potential Use Cases</h3>
-            <h5>Game Balancing:</h5>
+            <h4>Game Balancing:</h4>
             <p>
                 Developers can adjust difficulty settings or add dynamic difficulty adjustments based on player feedback trends.
             </p>
-            <h4>For Players: </h4>
+            <h4>Player Insights:</h4>
             <p>
-                Players can use this analysis to identify games suited to their preferences and skill levels, avoiding potential frustration or finding rewarding challenges.
+                Gaming platforms can use these findings to recommend games that align with individual preferences.
             </p>
-            <h4>For Platforms: </h4>
+            <h4>Community Engagement: </h4>
             <p>
-                Gaming platforms can implement smarter recommendation systems that consider player sentiment and difficulty perception.
+                Insights about difficulty-related frustrations can help developers address player concerns in updates or sequels.
             </p>
         </section>
 
-        
+        <section id="Limitations and Future Improvements">
+            <h4>In-Game Metrics:</h4>
+            <p>
+                Our analysis relied heavily on metadata such as playtime and the number of games owned, which do not fully capture a player's in-game behavior or progression. 
+                Including additional in-game metrics, such as achievement progression, difficulty settings, or completion rates, could help us better understand how players perceive and respond to game difficulty over time.
+            </p>
+            <h4>Modeling Challenges:</h4>
+            <p>
+                The models faced difficulties with imbalanced data, leading to weaker performance for underrepresented classes such as negative reviews or difficulty mentions. 
+                Simpler models like Decision Trees also failed to capture meaningful relationships, particularly between genres and difficulty mentions. 
+                Future work could address these issues using more advanced data balancing techniques, gaming-specific fine-tuning for NLP models, and hybrid approaches that combine advanced NLP with rule-based or ensemble methods.
+            </p>
+            <h4>Player Metadata and Experience:</h4>
+            <p>
+                Models using player metadata, such as playtime and number of games owned, showed moderate success in predicting difficulty mentions but struggled to consistently capture nuanced patterns. 
+                Adding features such as solo versus co-op gameplay styles or player-specific behaviors could enhance the predictive power of metadata-based models and provide a more complete picture of player preferences.
+            </p>
+        </section>
+
         
     </main>
     <footer>
