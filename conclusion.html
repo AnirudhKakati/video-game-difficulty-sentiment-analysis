@@ -48,12 +48,67 @@
                 </li>
                 <li>Player Experience and Sentiment: <br>
                 Beginner players gave lower sentiment scores compared to intermediate and experienced players, with differences confirmed to be statistically significant by our tests.
-                </li>
-                <li>Playtime and Difficulty Mentions: <br>
                 Players with shorter playtimes (less than 5 hours) were more likely to mention difficulty, with mentions decreasing as playtime increased.
                 </li>
             </ul>
         </section>
+
+        <section id="addressing-research-questions">
+            <h3>Addressing Research Questions</h3>
+            <ul>
+                <h4>1. Can we predict whether a review is positive based on its content?</h4>
+                <p>
+                    Our models could predict positive reviews well, with high accuracy and strong performance for positive feedback. 
+                    However, they struggled with identifying negative reviews, often missing key patterns in this category. 
+                    This highlights the challenges of balancing predictions for both positive and negative reviews.
+                </p>
+                <h4>2. Can genres of games indicate whether a player mentions difficulty?</h4>
+                <p>
+                    We tried to use game genres to predict if a review would mention difficulty, but the results showed no strong connection between the two. 
+                    This suggests that difficulty mentions cannot be reliably predicted based on genre alone.
+                </p>
+                <h4>3. Which genres are most associated with mentions of difficulty in reviews?</h4>
+                <p>
+                    We found that "co-op" and "metroidvania" games were the most likely to have reviews mentioning difficulty, while "competitive" and "multiplayer" games were the least likely. 
+                    However, these mentions of difficulty include both positive and negative discussions, such as difficulty being "too easy" or "too hard."
+                </p>
+                <h4>4. How does the sentiment score distribution differ between genres?</h4>
+                <p>
+                    Genres like "competitive" and "multiplayer" had the lowest average review sentiment, suggesting more critical feedback. 
+                    In contrast, "crpg" and "fantasy" games had the highest, reflecting more positive sentiment from players in those genres.
+                </p>
+                <h4>5. Can we model if a review mentions difficulty using review meta-data?</h4>
+                <p>
+                    We explored using details like review length and sentiment score to predict difficulty mentions. 
+                    While our models achieved decent accuracy, they struggled to identify reviews mentioning difficulty with enough consistency, especially for less common patterns.
+                </p>
+                <h4>6. Does the player's experience level affect their sentiment towards game difficulty?</h4>
+                <p>
+                    Players with less experience (beginners) were more likely to leave negative feedback about difficulty, while more experienced players tended to give higher ratings. 
+                    The difference was most noticeable between beginners and the other two groups (intermediate and experienced players).
+                </p>
+                <h4>7. How does the number of games owned by a player correlate with their review sentiment?</h4>
+                <p>
+                    We found no meaningful relationship between how many games a player owns and how they feel about a game’s difficulty. 
+                    Library size doesn’t appear to affect how players rate or review games.
+                </p>
+                <h4>8. Do reviews mentioning difficulty tend to be more positive or negative overall?</h4>
+                <p>
+                    Most reviews mentioning difficulty were positive, with higher sentiment scores. 
+                    This suggests players often enjoy discussing challenging games, though it doesn’t necessarily mean all mentions were about “hard” difficulty.
+                </p>
+                <h4>9. Are difficulty mentions more common in reviews with shorter playtimes compared to longer playtimes?</h4>
+                <p>
+                    Yes, we saw that reviews mentioning difficulty were more common among players with shorter playtimes, especially those with less than 5 hours. 
+                    As playtime increased, these mentions became less frequent, possibly indicating initial impressions play a large role.
+                </p>
+                <h4>10. What are the most commonly expressed words in negative reviews mentioning difficulty?</h4>
+                <p>
+                    Words like "game," "play," and "time" were the most common in negative reviews about difficulty. 
+                    However, these words are quite general, and more focused analysis would be needed to understand specific frustrations.
+                </p>
+            </ul>
+        </section>        
         
     </main>
     <footer>
