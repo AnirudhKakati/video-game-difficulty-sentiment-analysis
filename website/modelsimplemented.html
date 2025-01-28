@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Models Implemented - Player Sentiment Analysis in Video Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+</head>
+    <style>
+        ul {
+            list-style-type: disc;
+            margin-left: 20px; 
+            padding-left: 10px; 
+        }
+
+        ul ul {
+            list-style-type: circle; 
+            margin-left: 20px; 
+        }
+
+        ul ul ul {
+            list-style-type: square; 
+        }
+
+        li {
+            margin: 5px 0;
+        }
+    </style>
+<body style="background-image: url('../images/background8.jpg');">
+    <header>
+        <h1>Video Game Difficulty and Player Sentiment Analysis</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="introduction.html">Introduction</a></li>
+                <li><a href="dataexploration.html">Data Exploration</a></li>
+                <li><a href="modelsimplemented.html">Models Implemented</a></li>
+                <li><a href="statanalysis.html">Statistical Analysis</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+                <li><a href="team.html">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Model Implementation</h2>
+
+        <section id="BERT-model">
+            <h3>1. BERT Transformer Model with “review” as input and “voted_up” as output</h3>
+            <p>
+                The BERT model (Bidirectional Encoder Representations from Transformers) is a pre-trained transformer-based language model designed to understand text context bidirectionally. 
+                We leveraged it for text classification by fine-tuning it on our dataset to predict whether a review was positive (voted_up).
+            </p>
+            <p>
+                We will first load in our featured_reviews.csv into a dataframe. We take our “review” feature as X or our input and take “voted_up” as y or our output. 
+                The data initially looks like this:
+            </p>
+            <img src="../images/modelimplementation1.jpg" alt="Image" class="data-image">
+            <img src="../images/modelimplementation2.jpg" alt="Image" class="data-image">
+            <p>
+                BERT model first tokenizes this text data before training. Before tokenizing our data looked like this
+            </p>
+            <img src="../images/modelimplementation3.jpg" alt="Image" class="data-image">
+            <p>    
+                The tokenized transformed data looks like this:
+            </p>
+            <img src="../images/modelimplementation4.jpg" alt="Image" class="data-image">
+            <p>
+                Our processing involves the following steps:
+                <ul>
+                    <li>Used BERT's pre-trained tokenizer (bert-base-uncased) to tokenize the review text</li>
+                    <li>Each review was: <br>
+                        <ul type="o">
+                            <li>Split into tokens</li>
+                            <li>Converted into unique token IDs (input_ids)</li>
+                            <li>Padded or truncated to a maximum length of 128 tokens</li>
+                            <li>Generated an attention_mask to indicate which tokens should be attended to</li>
+                        </ul>
+                    </li>
+                    <li> Created a ReviewDataset class to manage the tokenized inputs and corresponding labels</li>
+                    <li>Split the dataset into training and testing sets (X_train, y_train, X_test, y_test)</li>
+                </ul>
+            </p>
+            <p>
+                The model training involved the following:
+                <ul>
+                    <li>Architecture:<br>
+                        <ul type="o">
+                            <li>Fine-tuned the bert-base-uncased model for binary classification</li>
+                            <li>Added a classification head on top of BERT to predict the voted_up label (output layer with sigmoid activation for probabilities)</li>
+                        </ul>
+                    </li>
+                    <li>Training Configuration:<br>
+                        <ul type="o">
+                            <li>Optimized with AdamW (specific for transformers)</li>
+                            <li>Loss function: Binary Cross-Entropy Loss</li>
+                            <li>Metrics: Accuracy, F1-Score</li>
+                            <li>Batch size: Adjusted to fit the GPU memory</li>
+                            <li>Learning rate: Fine-tuned with a warm-up scheduler for stable convergence</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After training the BERT model, we evaluated it on the test set. Below are the results:
+            </p>
+            <img src="../images/modelimplementation5.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 93%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 65%</li>
+                                    <li>Recall: 69%</li>
+                                    <li>F1 Score: 67%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 97%</li>
+                                    <li>Recall: 96%</li>
+                                    <li>F1 Score: 96%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 81%, Recall = 82%, F1-Score = 82%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                The model performs exceptionally well for positive reviews (class 1), which dominate the dataset. 
+                Performance for negative reviews (class 0) is weaker, with lower precision and recall. 
+                The overall weighted metrics indicate a robust model for predicting review positivity
+            </p>
+            <p>
+                To try to improve our model we will incorporate more features into the next model.
+            </p>
+            
+        </section>
+        
+        <section id="BERT model 2">
+            <h3>2. BERT Transformer Model with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+            <p>
+                We make another BERT transfomer model but incorporate two more numerical features along with the review column.
+                We take “review”, “review_length” and “sentiment_score” as our input X and “voted_up” as our output y. Our data looks like this:
+            </p>
+            <img src="../images/modelimplementation6.jpg" alt="Image" class="data-image">
+            <p>
+                The numerical columns are normalized by min-max scaling. The data now looks like this:
+            <p>
+            <img src="../images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <p>
+                The review column is tokenized in the same manner as the previous and looks like this after transformation again:
+            </p>
+            <img src="../images/modelimplementation4.jpg" alt="Image" class="data-image">
+            <p>
+                The processing steps are similar to the previous model: <br>
+                <ul>
+                    <li>Used the BertTokenizer to tokenize the review text into input_ids and attention_mask</li>
+                    <li>Created a custom Dataset class (ReviewDataset) to include: <br>
+                        <ul>
+                            <li>Text Features: Tokenized input IDs and attention masks</li>
+                            <li>Numerical Features: Normalized review_length and sentiment_score</li>
+                            <li>Labels: voted_up</li>
+                        </ul>
+                            
+                    </li>
+                    <li>The key difference is that the __getitem__ method was updated to return both numerical features and tokenized text features, 
+                        making the dataset compatible with the combined BERT model</li>
+                </ul>
+            </p>
+            <p>
+                To incorporate both text and numerical features, a custom BERT-based model was designed:
+                <ul>
+                    <li>Base Model: Used the pre-trained bert-base-uncased model. 
+                        Extracted the CLS token's representation (768 dimensions) from the BERT output as a summary of the review's meaning</li>
+                    <li>Numerical Features Integration: <br>
+                        <ul>
+                            <li>Concatenated the CLS token output with the normalized numerical features</li>
+                            <li>Adjusted the fully connected layer to accept an input size of 768 + len(numerical_cols) (to account for the numerical features)</li>
+                        </ul>
+                    </li>
+                    <li>Classification Layer: <br>
+                        <ul>
+                            <li>Used a fully connected layer with 2 output neurons (for binary classification)</li>
+                            <li>Added a dropout layer for regularization</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                The model was trained similar to the previous model:
+                <ul>
+                    <li>Optimized using the AdamW optimizer with a learning rate of 2e-5</li>
+                    <li>Used Cross-Entropy Loss as the objective function</li>
+                    <li>Trained over 3 epochs, with a batch size of 16</li>
+                    <li>The key difference being that the forward pass now included the concatenated CLS token and numerical features</li>
+                </ul>
+            </p>
+            <p>
+                After training this new BERT model, we evaluated it on the test set. Below are the results:
+            </p>
+            <img src="../images/modelimplementation8.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 93%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 69%</li>
+                                    <li>Recall: 63%</li>
+                                    <li>F1 Score: 66%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 96%</li>
+                                    <li>Recall: 97%</li>
+                                    <li>F1 Score: 96%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 82%, Recall = 80%, F1-Score = 81%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Adding the additional features (review_length and sentiment_score) did not improve the model's performance. 
+                Overall, while there was a minor gain in precision for negative reviews, the drop in recall led to no significant improvement in the overall metrics.
+            </p>
+        </section>
+        
+        <section id="LightGBM Classifier Model">
+            <h3>3. LightGBM Classifier Model with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+            <p>
+                We will now use a LightGBM classifier model to try to model the same relationship. The data looks like this again:
+            </p>
+            <img src="../images/modelimplementation6.jpg" alt="Image" class="data-image">
+            <p>
+                The numerical columns are again normalized and the data looks like this:
+            </p>
+            <img src="../images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <p>
+                The review data is transformed for it to work with our classifier model. 
+                The transformation involves converting raw review text into numerical features using TF-IDF (Term Frequency-Inverse Document Frequency). 
+                This step allows text data to be represented numerically for machine learning models. The steps are:
+                <uL>
+                    <li>Tokenization: The TfidfVectorizer splits each review into individual words (tokens)</li>
+                    <li>Vocabulary Creation: Builds a vocabulary of the most frequent 5000 words across all reviews</li>
+                    <li>TF-IDF Score Calculation: Assigns a score to each word based on its frequency in the review (Term Frequency) and its rarity across all reviews (Inverse Document Frequency)</li>
+                    <li>Sparse Matrix Representation: Converts each review into a row of numerical values (TF-IDF scores), where: <br>
+                        <ul>
+                            <li>Rows = Reviews</li>
+                            <li>Columns = Words in the vocabulary</li>
+                            <li>Values = Importance of the word in that review</li>
+                        </ul>
+                    </li>
+                </uL>
+            </p>
+            <p>
+                The transformed data looks like this:
+            </p>
+            <img src="../images/modelimplementation9.jpg" alt="Image" class="data-image">
+            <p>
+                We used LightGBM (LGBMClassifier), a gradient boosting framework that is highly efficient for handling large datasets and sparse matrices (like our TF-IDF + numerical features). 
+                The model was initialized with the parameter class_weight="balanced" to handle class imbalance between positive (voted_up=1) and negative (voted_up=0) reviews.
+            </p>
+            <p>
+                The model was trained on the combined feature set of:
+                <ul>
+                    <li>TF-IDF matrix: Captures the textual content of the review</li>
+                    <li>Scaled numerical features: review_length and sentiment_score</li>
+                </ul>
+            </p>
+            <p>
+                Hyperparameter Tuning: To improve the model’s performance, we conducted a Grid Search over a reduced parameter space to find the best combination of hyperparameters. 
+                The following parameters were tuned:
+                <uL>
+                    <li>learning_rate: Controls how much the model adjusts weights after each boosting round</li>
+                    <li>n_estimators: The number of boosting rounds</li>
+                    <li>max_depth: The depth of each decision tree</li>
+                    <li>subsample: The proportion of samples used for training each tree</li>
+                    <li>colsample_bytree: The proportion of features used for training each tree</li>
+                </uL>
+                We used GridSearchCV with 3-fold cross-validation and optimized for the F1-score, balancing precision and recall
+            </p>
+            <p>
+                Threshold Adjustment: In the best parameter model, we adjusted the decision threshold (default is 0.5) to optimize performance for different class priorities.
+                The steps were the following:
+                <ul>
+                    <li>Obtained prediction probabilities using model.predict_proba</li>
+                    <li>Tested thresholds ranging from 0.1 to 0.9</li>
+                    <li>Evaluated metrics (precision, recall, F1-score) for each threshold</li>
+                </ul>
+                By lowering the threshold we improved recall for class 0 (negative reviews), reducing false negatives. 
+                But by increasing the threshold precision for class 1 (positive reviews) improved, which reduced false positives.
+                To balance both out, a threshold value of 0.3 was chosen.
+            </p>
+            <p>
+                The results before hyperparameter tuning and threshold adjustment are the following:
+            </p>
+            <img src="../images/modelimplementation10.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 86%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 40%</li>
+                                    <li>Recall: 74%</li>
+                                    <li>F1 Score: 52%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 97%</li>
+                                    <li>Recall: 88%</li>
+                                    <li>F1 Score: 92%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 68%, Recall = 81%, F1-Score = 72%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and threshold adjust, the following were the results:
+            </p>
+            <img src="../images/modelimplementation11.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 91%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 53%</li>
+                                    <li>Recall: 54%</li>
+                                    <li>F1 Score: 54%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 95%</li>
+                                    <li>F1 Score: 95%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 74%, Recall = 74%, F1-Score = 74%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After hyperparameter tuning and threshold adjustment, the LightGBM model showed improvements in balancing precision and recall for Class 0 (negative reviews). 
+                Precision and recall for Class 0 became 53% and 54%, raising the F1-score from 52% to 54%. Class 1 (positive reviews) maintained strong performance, with an F1-score of 95%, and the overall accuracy increased from 86% to 91%. 
+                While the model successfully enhanced detection of negative reviews, the F1-score for Class 0 remains moderate due to class imbalance. The macro average F1-score improved to 74%. 
+                These results indicate that the tuning effectively balanced performance between classes, though further techniques might be required to address residual challenges in negative review detection.
+            </p>
+        </section>
+
+        <section id="Ensemble LightGBM, LR, NB Model">
+            <h3>4. Ensemble Stacking Model using LightGBM, Logistic Regression and Naïve Bayes with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+            <p>
+                We try to use an ensemble model for modelling the same relationship. The dataset is the same which looks like this after scaling:
+            </p>
+            <img src="../images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <p>
+                The review is transformed again in a similar way as the last LightGBM model and it again looks like this:
+            </p>
+            <img src="../images/modelimplementation9.jpg" alt="Image" class="data-image">
+            <p>
+                Ensemble models combine predictions from multiple base models to improve overall performance by leveraging the strengths of each model. 
+                We implemented a stacking ensemble model, which:
+                <uL>
+                    <li>Combines predictions from multiple base models</li>
+                    <li>Uses a meta-model (final estimator) to learn from these predictions and make the final decision</li>
+                </uL>
+                Our base models were the following:
+                <uL>
+                    <li> LightGBM Classifier <br>
+                        <ul>
+                            <li>A gradient boosting model, good for handling sparse data and complex patterns</li>
+                            <li>Parameters: class_weight='balanced', random_state=42</li>
+                        </ul>
+                    </li>
+                    <li> Logistic Regression <br>
+                        <ul>
+                            <li>A simple linear model, effective for linearly separable data</li>
+                            <li>Parameters: max_iter=1000</li>
+                        </ul>
+                    </li>
+                    <li> Multinomial NB
+                        <ul>
+                            <li>A probabilistic model, particularly suited for text data</li>
+                            <li>Works well when features (e.g., TF-IDF) are conditionally independent</li>
+                        </ul>
+                    </li>
+                </uL>
+                We used Logistic Regression as the meta-model, which learns how to combine predictions from the base models. 
+                Cross-validation (cv=3) ensures that the meta-model is trained on out-of-sample predictions
+            </p>
+            <p>
+                Each base model was trained on the training set. 
+                Predictions from these models were combined into new features for the meta-model.
+                The meta-model was trained on the combined predictions to make the final decision
+            </p>
+            <p>
+                Hyperparameter Tuning: To further optimize the stacking model, we performed hyperparameter tuning using grid search. 
+                The grid search used 3-fold cross-validation and was optimized for the weighted F1-score. The following following parameters were tuned:
+                <ul>
+                    <li> LightGBM Parameters<br>
+                        <ul>
+                            <li>n_estimators: Number of boosting rounds ([100, 150])</li>
+                            <li>learning_rate: Step size for weight updates ([0.05, 0.1])</li>
+                            <li>max_depth: Depth of each tree ([3, 5])</li>
+                        </ul>
+                    </li>
+                    <li>Logistic Regression Parameters (Meta-Model): <br>
+                        <ul>
+                            <li>C: Regularization strength ([0.1, 1.0]).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                We will also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the most optimal results so we choose this.
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="../images/modelimplementation12.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 93%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 75%</li>
+                                    <li>Recall: 51%</li>
+                                    <li>F1 Score: 61%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 98%</li>
+                                    <li>F1 Score: 96%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 85%, Recall = 75%, F1-Score = 79%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.7, we got the following results:
+            </p>
+            <img src="../images/modelimplementation13.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 93%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 65%</li>
+                                    <li>Recall: 62%</li>
+                                    <li>F1 Score: 63%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 96%</li>
+                                    <li>Recall: 96%</li>
+                                    <li>F1 Score: 96%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 81%, Recall = 79%, F1-Score = 80%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                The stacking ensemble model initially performed decent, achieving a macro F1-score of 79% and high precision and recall for Class 1 (positive reviews). 
+                However, Class 0 (negative reviews) struggled with a low recall of 51% and an F1-score of 61%, indicating room for improvement in identifying negative reviews. 
+                After hyperparameter tuning and adjusting the decision threshold to 0.7, the model showed a better balance for Class 0, with precision improving from 75% to 65% and recall increasing from 51% to 62%. Although the F1-score for Class 0 rose marginally to 63%, the performance for Class 1 remained robust, with a precision and recall of 96%. Overall accuracy remained consistent at 93%, and the macro-average F1-score improved slightly, indicating that threshold adjustment effectively enhanced the model's ability to identify negative reviews without sacrificing the performance for positive reviews
+            </p>
+        </section>
+        
+        <section id="Bagging with LightGBM Model ">
+            <h3>5. Bagging Model using LightGBM Classifier with “review”, “review_length” and “sentiment_score” as input and “voted_up” as output</h3>
+            <p>
+                We make an ensemble model by bagging the LightGBM Classifier and try to model the same relationship. The dataset is the same which looks like this after scaling:
+            </p>
+            <img src="../images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <p>
+                The review is transformed again in a similar way as the last ensemble model and it again looks like this:
+            </p>
+            <img src="../images/modelimplementation9.jpg" alt="Image" class="data-image">
+            <p>
+                Bagging (Bootstrap Aggregating) combines multiple instances of a base model to reduce variance and improve stability. 
+                Each base model is trained on a random subset of the data (with replacement), and predictions are aggregated to produce the final result.
+            </p>
+            <p>
+                We implemented a BaggingClassifier using LightGBM as the base estimator. It has the following key parameters:
+                <uL>
+                    <li>Base Estimator: LightGBM (class_weight='balanced', random_state=42) to handle class imbalance and capture complex relationships</li>
+                    <li> Bagging Parameters: <br>
+                        <ul>
+                            <li>n_estimators: Number of base models</li>
+                            <li>max_samples: Fraction of training samples used by each base model</li>
+                            <li>max_features: Fraction of features used by each base model</li>
+                        </ul>
+                    </li>
+                </uL>
+            </p>
+            <p>
+                To optimize the BaggingClassifier, we performed hyperparameter tuning using grid search on a small search space to maintain efficiency. 
+                The grid search used 3-fold cross-validation and was optimized for the weighted F1-score. All 3 parameters are tuned:
+                <uL>
+                    <li>n_estimators: [5, 10]</li>
+                    <li>max_samples: [0.6, 0.8]</li>
+                    <li>max_features: [0.6, 0.8] </li>
+                </uL>
+            </p>
+            <p>
+                After training the BaggingClassifier with the best parameters, 
+                we will also do threshold adjustment from 0.1 to 0.9. 
+                A threshold value of 0.4 gave the most optimal results so we choose this.
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="../images/modelimplementation14.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 88%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 43%</li>
+                                    <li>Recall: 74%</li>
+                                    <li>F1 Score: 55%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 97%</li>
+                                    <li>Recall: 89%</li>
+                                    <li>F1 Score: 93%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 70%, Recall = 82%, F1-Score = 74%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.4, we got the following results:
+            </p>
+            <img src="../images/modelimplementation15.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 91%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Negative reviews): <br>
+                                <ul>
+                                    <li>Precision: 55%</li>
+                                    <li>Recall: 58%</li>
+                                    <li>F1 Score: 57%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Positive reviews): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 95%</li>
+                                    <li>F1 Score: 95%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 75%, Recall = 77%, F1-Score = 76%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                The BaggingClassifier model initially performed reasonably well, achieving an accuracy of 88% and a macro average F1-score of 74%. 
+                However, Class 0 (negative reviews) had a low F1-score of 55% due to its relatively low precision (43%) and moderate recall (74%). 
+                After hyperparameter tuning and adjusting the threshold to 0.4, the model showed an improvement in balancing performance for Class 0. Precision for Class 0 increased to 55%, while recall descreased to 58%, resulting in a better F1-score of 57%. 
+                The performance for Class 1 (positive reviews) remained strong, with a precision and recall of 95%. 
+                The overall accuracy increased to 91%, and the macro-average F1-score rose to 76%, reflecting a better balance between the two classes. 
+            </p>
+            
+        </section>
+        
+        <section id="LightGBM Classifier Model 2">
+            <h3>6. LightGBM Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+            <p>
+                We will try to predict if a review mentions difficulty using review meta data like length and sentiment score. 
+                We will try to model review_length and sentiment_score to mentions_difficulty
+            </p>
+            <p>
+                This model aimed to predict whether a review mentions difficulty (mentions_difficulty) using two features: review_length and sentiment_score. 
+                Given the significant imbalance in the target variable, with far fewer reviews mentioning difficulty, a combination of under-sampling and over-sampling techniques was used to create a balanced training dataset.
+            </p>
+            <p>
+                Our Input dataset will initially look like this:
+            </p>
+            <img src="../images/modelimplementation16.jpg" alt="Image" class="data-image">
+            <p>
+                Both the numerical columns are scaled and they look like this now:
+            </p>
+            <img src="../images/modelimplementation17.jpg" alt="Image" class="data-image">
+            <p>
+                The output classes are imbalanced. They look like this:
+            </p>
+            <img src="../images/modelimplementation18.jpg" alt="Image" class="data-image">
+            <p>
+                We use both undersampling and oversampling and the data now looks like this:
+            </p>
+            <img src="../images/modelimplementation19.jpg" alt="Image" class="data-image">
+            <p>
+                The LightGBMClassifier was used for training, leveraging its ability to handle class imbalance with the class_weight='balanced' parameter. 
+                Hyperparameter tuning was conducted using GridSearchCV, with 3 fold cross validation, to optimize the following parameters with respect to F1 score:
+                <uL>
+                    <li>n_estimators: Number of boosting rounds ([50, 100])</li>
+                    <li>max_depth: Maximum depth of each decision tree ([3, 5])</li>
+                    <li>learning_rate: Learning rate for boosting ([0.05, 0.1])</li>
+                    <li>colsample_bytree: Fraction of features used for each tree ([0.8, 1.0])</li>
+                </uL>
+            </p>
+            <p>
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.7 gave the best results
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="../images/modelimplementation20.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 76%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 85%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 34%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 47%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 65%, Recall = 76%, F1-Score = 66%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.7, we got the following results:
+            </p>
+            <img src="../images/modelimplementation21.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 87%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 92%</li>
+                                    <li>Recall: 93%</li>
+                                    <li>F1 Score: 92%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 52%</li>
+                                    <li>Recall: 48%</li>
+                                    <li>F1 Score: 50%</li>
+                                </ul>
+                            </li>
+                            <li>Weighted Average: Precision = 72%, Recall = 71%, F1-Score = 71%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After hyperparameter tuning and threshold adjustment, the LightGBM model demonstrated improved balance between the two classes. 
+                Initially, the model achieved an accuracy of 76% and a macro average F1-score of 66%, but struggled to identify Class 1 (minority class), with a low precision of 34% and a moderate recall of 76%, resulting in an F1-score of 47%. 
+                By tuning hyperparameters and adjusting the decision threshold to 0.7, the model significantly improved its performance for Class 1, with precision increasing to 52%. 
+                However, recall for Class 1 dropped to 48%, resulting in a slightly better F1-score of 50%. For Class 0, both precision and recall improved to 92% and 93%, respectively, ensuring robust performance for the majority class. 
+                The overall accuracy rose to 87%, with a macro average F1-score of 71%, reflecting a better balance between classes while maintaining high accuracy.  
+            </p>
+        </section>
+
+        <section id="XGBoost Classifier Model ">
+            <h3>7. XGBoost Classifier Model with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+            <p>
+                We will now use an XGBoost Classifier model to try to model the same relationship as the last one. 
+                This model aims to predict whether a review mentions difficulty (mentions_difficulty) using features like review_length and sentiment_score. 
+                To handle the class imbalance, a combination of under-sampling and SMOTE was applied to create a balanced training dataset, followed by training an XGBoostClassifier optimized through hyperparameter tuning.
+            </p>
+            <p>
+                The input dataset looks like this again:
+            </p>
+            <img src="../images/modelimplementation16.jpg" alt="Image" class="data-image">
+            <p>
+                After being normalized it looks like this:
+            </p>
+            <img src="../images/modelimplementation17.jpg" alt="Image" class="data-image">
+            <p>
+                The output classes are imbalanced. They look like this:
+            </p>
+            <img src="../images/modelimplementation18.jpg" alt="Image" class="data-image">
+            <p>
+                We use both undersampling and oversampling and the data now looks like this:
+            </p>
+            <img src="../images/modelimplementation19.jpg" alt="Image" class="data-image">
+            <p>
+                An XGBoostClassifier was used for training. The following default parameters were applied:
+                <ul>
+                    <li>scale_pos_weight: Adjusted to account for residual class imbalance in the resampled data</li>
+                    <li>n_estimators: Set to 200, representing the number of boosting rounds</li>
+                    <li>learning_rate: A step size of 0.1 for gradual learning</li>
+                    <li>max_depth: Limited to 6 to balance complexity and prevent overfitting</li>
+                    <li>subsample: Randomly sampled 80% of training data for each tree to improve model robustness</li>
+                    <li>colsample_bytree: Randomly sampled 80% of features for each tree to reduce correlation</li>
+                </ul>
+            </p>
+            <p>
+                Hyperparameter tuning was conducted using GridSearchCV, with 3 fold cross validation, and all the parameters were optimized with respect to F1 Score:
+                <ul>
+                    <li>n_estimators: [100, 200]</li>
+                    <li>learning_rate: [0.05, 0.1].</li>
+                    <li>max_depth: [4, 6].</li>
+                    <li>subsample: [0.8, 1.0].</li>
+                    <li>colsample_bytree: [0.8, 1.0].</li>
+                </ul>
+            </p>
+            <p>
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the best results
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="../images/modelimplementation22.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 67%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 96%</li>
+                                    <li>Recall: 64%</li>
+                                    <li>F1 Score: 77%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 27%</li>
+                                    <li>Recall: 84%</li>
+                                    <li>F1 Score: 41%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 62%, Recall = 74%, F1-Score = 59%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.8, we got the following results:
+            </p>
+            <img src="../images/modelimplementation23.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 86%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 92%</li>
+                                    <li>Recall: 91%</li>
+                                    <li>F1 Score: 92%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 48%</li>
+                                    <li>Recall: 51%</li>
+                                    <li>F1 Score: 49%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 70%, Recall = 71%, F1-Score = 70%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Initially, the XGBoost model performed moderately well for Class 0, with a precision of 96% and an F1-score of 77%. 
+                However, it struggled with Class 1, achieving only 27% precision despite a recall of 84%, resulting in a low F1-score of 41%. 
+                The overall accuracy was 67%, indicating difficulty in balancing the two classes.
+                After hyperparameter tuning and threshold adjustment (threshold = 0.8), the model showed improved balance. 
+                Class 1 precision increased to 48%, with recall at 51%, leading to a slightly better F1-score of 49%. 
+                Class 0 maintained stable performance, with a precision of 92% and recall of 91%, resulting in an F1-score of 92%. 
+                The overall accuracy rose to 86%, and the macro average F1-score improved to 70%, reflecting better handling of the minority class without sacrificing much performance for the majority class
+            </p>
+        </section>
+
+        <section id="Ensemble XGBoost, LR, NB Model ">
+            <h3>8. Ensemble Stacking Model using XGBoost Classifier, Logistic Regression and Naïve Bayes with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+            <p>
+                We will now use an ensemble model of XGBoost, Logistic Regression and Naïve Bayes to model the same relationship.
+                This model combines the predictions from multiple base models using a stacking ensemble to predict whether a review mentions difficulty (mentions_difficulty). 
+                The stacking approach leverages diverse models to improve overall performance.
+            </p>
+            <p>
+                The input dataset looks like this again:
+            </p>
+            <img src="../images/modelimplementation16.jpg" alt="Image" class="data-image">
+            <p>
+                After being normalized it looks like this:
+            </p>
+            <img src="../images/modelimplementation17.jpg" alt="Image" class="data-image">
+            <p>
+                The output classes are imbalanced. They look like this:
+            </p>
+            <img src="../images/modelimplementation18.jpg" alt="Image" class="data-image">
+            <p>
+                We use both undersampling and oversampling and the data now looks like this:
+            </p>
+            <img src="../images/modelimplementation19.jpg" alt="Image" class="data-image">
+            <p>
+                Our base models were the following:
+                <ul>
+                    <li>XGBoost (XGBClassifier): A gradient boosting model configured to handle class imbalance (scale_pos_weight=2) and capture complex relationships</li>
+                    <li>Logistic Regression: A simple linear model to handle linearly separable patterns</li>
+                    <li>Gaussian Naive Bayes: A probabilistic model effective with sparse and conditionally independent features</li>
+                </ul>
+            </p>
+            <p>
+                Logistic Regression was used as the meta model to learn how to combine predictions from the base models. 
+                3-fold cross-validation (cv=3) ensured robust training of the meta-model
+            </p>
+            <p>
+                Hyperparameter tuning was conducted using GridSearchCV to optimize the stacking model:
+                <ul>
+                    <li> XGBoost Parameters: <br>
+                        <ul>
+                            <li>n_estimators: [100, 150] (Number of trees)</li>
+                            <li>max_depth: [4, 6] (Tree depth)</li>
+                            <li>learning_rate: [0.05, 0.1] (Step size)</li>
+                        </ul>
+                    </li>
+                    <li> Meta-Model Parameter: <br>
+                        <ul>
+                            <li>C: [0.1, 1, 10] (Regularization strength for Logistic Regression)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.7 gave the best results
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="../images/modelimplementation24.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 75%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 84%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 33%</li>
+                                    <li>Recall: 75%</li>
+                                    <li>F1 Score: 46%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 64%, Recall = 75%, F1-Score = 65%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.7, we got the following results:
+            </p>
+            <img src="../images/modelimplementation25.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 85%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 92%</li>
+                                    <li>Recall: 90%</li>
+                                    <li>F1 Score: 91%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 46%</li>
+                                    <li>Recall: 53%</li>
+                                    <li>F1 Score: 49%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 69%, Recall = 72%, F1-Score = 70%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Initially, the model achieved decent results for Class 0, with an F1-score of 84%, but struggled significantly with Class 1, where the F1-score was only 46% due to low precision of 33%. 
+                The overall accuracy of 75% highlighted the model's difficulty in handling the minority class, despite reasonable performance for the majority class.
+                After hyperparameter tuning and adjusting the threshold to 0.7, the model's balance between the two classes improved. 
+                For Class 1, precision increased to 46%, and recall to 53%, leading to a slightly better F1-score of 49%. Class 0 maintained strong performance, with an F1-score of 91%. 
+                The overall accuracy increased to 85%, and the macro average F1-score improved to 70%, showing better class balance while preserving good performance for the dominant class
+            </p>
+        </section>
+        
+        <section id="Ensemble LightGBM, LR, NB Model 2">
+            <h3>9. Ensemble Stacking Model using LightGBM, Logistic Regression and Naïve Bayes with “review_length”, “sentiment_score” as input and “mentions_difficulty” as output</h3>
+            <p>
+                We will now use an ensemble model of LightGBM, Logistic Regression and Naïve Bayes to model the same relationship.
+                This stacking ensemble model combines the predictions of three base models—LightGBM, Logistic Regression, and Gaussian Naive Bayes—to predict whether a review mentions difficulty (mentions_difficulty). 
+                The final meta-model uses Logistic Regression to combine the predictions from the base models for better overall performance
+            </p>
+            <p>
+                The input dataset looks like this again:
+            </p>
+            <img src="../images/modelimplementation16.jpg" alt="Image" class="data-image">
+            <p>
+                After being normalized it looks like this:
+            </p>
+            <img src="../images/modelimplementation17.jpg" alt="Image" class="data-image">
+            <p>
+                The output classes are imbalanced. They look like this:
+            </p>
+            <img src="../images/modelimplementation18.jpg" alt="Image" class="data-image">
+            <p>
+                We use both undersampling and oversampling and the data now looks like this:
+            </p>
+            <img src="../images/modelimplementation19.jpg" alt="Image" class="data-image">
+            <p>
+                Our base models were the following:
+                <ul>
+                    <li>LightGBMClassifier: Handles complex patterns and class imbalance with class_weight='balanced'</li>
+                    <li>Logistic Regression: A simple linear model to handle linearly separable patterns</li>
+                    <li>Gaussian Naive Bayes: A probabilistic model effective with sparse and conditionally independent features</li>
+                </ul>
+            </p>
+            <p>
+                Logistic Regression combines the predictions of the base models, using 3-fold cross-validation (cv=3) to ensure robust training
+            </p>
+            <p>
+                Hyperparameter tuning was conducted using GridSearchCV to optimize the stacking model:
+                <ul>
+                    <li> LightGBM Parameters: <br>
+                        <ul>
+                            <li>n_estimators: [100, 150] (Number of trees)</li>
+                            <li>max_depth: [4, 6] (Tree depth)</li>
+                            <li>learning_rate: [0.05, 0.1] (Step size)</li>
+                        </ul>
+                    </li>
+                    <li> Meta-Model Parameter: <br>
+                        <ul>
+                            <li>C: [0.1, 1, 10] (Regularization strength for Logistic Regression)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning we also do threshold adjustment from 0.1 to 0.9. A threshold value of 0.8 gave the best results
+            </p>
+            <p>
+                Before hyperparameter tuning and threshold adjustment we got the following results:
+            </p>
+            <img src="../images/modelimplementation26.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 75%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 95%</li>
+                                    <li>Recall: 76%</li>
+                                    <li>F1 Score: 84%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 33%</li>
+                                    <li>Recall: 75%</li>
+                                    <li>F1 Score: 46%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 64%, Recall = 76%, F1-Score = 65%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                After tuning and choosing threshold of 0.7, we got the following results:
+            </p>
+            <img src="../images/modelimplementation27.jpg" alt="Image" class="data-image">
+            <p>
+                <ul>
+                    <li>Accuracy: 88%</li>
+                    <li>Classification Report: <br>
+                        <ul type="o">
+                            <li>Class 0 (Does not mention difficulty): <br>
+                                <ul>
+                                    <li>Precision: 91%</li>
+                                    <li>Recall: 95%</li>
+                                    <li>F1 Score: 93%</li>
+                                </ul>
+                            </li>
+                            <li>Class 1 (Mentions difficulty): <br>
+                                <ul>
+                                    <li>Precision: 58%</li>
+                                    <li>Recall: 43%</li>
+                                    <li>F1 Score: 49%</li>
+                                </ul>
+                            </li>
+                            <li>Macro Average: Precision = 69%, Recall = 72%, F1-Score = 70%</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Initially, the model showed decent performance for Class 0, with an F1-score of 84%, but struggled significantly with Class 1, achieving only 46% due to low precision (33%). 
+                The overall accuracy of 76% and a macro average F1-score of 65% indicated a clear imbalance in handling the two classes, with the minority class being poorly identified.
+                After hyperparameter tuning and adjusting the threshold to 0.8, the model achieved better balance. 
+                Precision for Class 1 improved significantly to 58%, although recall decreased to 43%, resulting in a slightly improved F1-score of 49%. 
+                Class 0 maintained robust performance, with an F1-score of 93% due to high precision (91%) and recall (95%). 
+                The overall accuracy increased to 88%, and the macro F1-score rose to 70%.
+            </p>
+        
+        <section id="DT Classifier Model ">
+            <h3>10. Decision Tree, Random Forest and Logistic Regression Models with genre data as input and "mentions_difficulty" as output</h3>
+            <p>
+                For the next models we will try to predict the relationship between genres and the mentions of difficulty. 
+                We will use all our one hot encoded genre columns ('roguelike', 'co_op', 'base_building', 'soulslike', 'deckbuilding', 'puzzle', 'metroidvania', 'rpg', 'competitive', 'first_person', 'crpg', 'multiplayer', 'action', 'sandbox', 'fantasy', 'simulation', 'platformer', 'shooter', 'open_world', 'strategy', 'survival', 'adventure', 'crafting', 'third_person', 'turn_based', '2d')
+                as input and "mentions_difficulty" as output.
+            </p>
+            <p>
+                Our input data looks like this:
+            </p>
+            <img src="../images/modelimplementation28.jpg" alt="Image" class="data-image">
+            <p>
+                The output class is imabalanced and the counts look like this:
+            </p>
+            <img src="../images/modelimplementation29.jpg" alt="Image" class="data-image">
+            <p>
+                We use SMOTE oversampling. The new counts look like this:
+            </p>
+            <img src="../images/modelimplementation30.jpg" alt="Image" class="data-image">
+            <p>
+                We first implemented a Decision tree model with and then a Random Forest model both with the parameter class_weight="balanced" and other default parameters.
+                Next we implement a Logistic Regression Model with max_iter=1000. 
+                All 3 models gave identical results which look like this:
+            </p>
+            <img src="../images/modelimplementation31.jpg" alt="Image" class="data-image">
+            <p>
+                Hyperparameter tuning was done for all 3 of them:
+                <ul>
+                    <li> Decision Tree: <br>
+                        <ul>
+                            <li>criterion: ['gini', 'entropy']</li> 
+                            <li>max_depth: [5, 10, 15, None]</li>  
+                            <li>min_samples_split: [2, 5, 10]</li>  
+                            <li>min_samples_leaf: [1, 5]</li>  
+                        </ul>
+                    </li>
+                    <li> Random Forest <br>
+                        <ul>
+                            <li>n_estimators: [100, 200]</li> 
+                            <li>max_depth: [5, 10, 15, None]</li>  
+                            <li>min_samples_split: [2, 5, 10]</li>  
+                            <li>min_samples_leaf: [1, 5]</li>  
+                            <li>max_features: ['sqrt', 'log2']</li>  
+                        </ul>
+                    </li>
+                    <li> Logistic Regression: <br>
+                        <ul>
+                            <li>C: [0.01, 0.1, 1, 10, 100]</li> 
+                            <li>penalty: ['l1','l2']</li>  
+                            <li>solver: ['liblinear', 'saga']</li>  
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                Even after tuning, all 3 models yield almost the same results again, same as the ones before. These look like this:
+            </p>
+            <img src="../images/modelimplementation32.jpg" alt="Image" class="data-image">
+            <p>
+                Since it produces nearly identical results with all three models, even after tuning, we can conclude that there isn't strong enough evidence in the data to model the mentioned relationship
+            </p>
+        </section>
+        <section>
+            <p>
+                For a detailed walkthrough of our model implementation process, you can view our 
+                full Jupyter notebook <a href="notebook_html/model_implementation.html" target="_blank">here</a>.
+            </p>
+        </section>
+            
+    </main>
+
+    <footer>
+        2024 Video Game Sentiment Analysis Team
+    </footer>
+</body>
+</html>
