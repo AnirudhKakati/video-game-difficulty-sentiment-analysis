@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
 </head>
-<body style="background-image: url('/images/background3.jpg');">
+<body style="background-image: url('images/background3.jpg');">
     <header>
         <h1>Video Game Difficulty and Player Sentiment Analysis</h1>
         <nav>
@@ -76,7 +76,7 @@
             <p>
                 The API returns the reviews in JSON Format. The raw review data for each game looks something like this:
             </p>
-            <img src="/images/raw_review_data.jpg" alt="Raw Review Image" class="data-image">
+            <img src="images/raw_review_data.jpg" alt="Raw Review Image" class="data-image">
         </section>
         <style>
             .two-column-list {
@@ -107,7 +107,7 @@
                 All records with empty or irrelevant reviews after the transformations were dropped with the dataset now having close to 43000 records. 
                 The cleaned dataset is stored in a csv which looks like this:
             </p>
-            <img src="/images/cleaned_dataset.jpg" alt="Image" class="data-image">
+            <img src="images/cleaned_dataset.jpg" alt="Image" class="data-image">
             <p>For a detailed walkthrough of our data collection and preprocessing step, you can view our 
                 full Jupyter notebook <a href="notebook_html/getting_and_cleaning_reviews.html" target="_blank">here</a>.
             </p>
@@ -118,39 +118,39 @@
             <p>
                 First we look at some inital data exploration. We load our cleaned reviews dataset into a pandas dataframe df. The columns along with their data types look like this:
             </p>
-            <img src="/images/columns_and_datatypes.jpg" alt="Image" class="data-image">
+            <img src="images/columns_and_datatypes.jpg" alt="Image" class="data-image">
             <p>
                 We have 9 columns, with game_name and the review being objects (string), the voted_up which indicates if the review was positive or negative being boolean,
                 and all our columns with information about the author of the review being numerical.
                 We can then get a summary of all numerical columns of our dataset:
             </p>
-            <img src="/images/numerical_summary.jpg" alt="Image" class="data-image">
+            <img src="images/numerical_summary.jpg" alt="Image" class="data-image">
             <p>
                 Some common statistics like the mean, standard deviation and other percentile values for all our numerical columns are displayed.
                 We can then see how many positive and negative reviews we have in total in our dataset.
             </p>
-            <img src="/images/positive_negative_count.jpg" alt="Image" class="data-image">
+            <img src="images/positive_negative_count.jpg" alt="Image" class="data-image">
             <p>
                 There around 38600 positive reviews and 4300 negative reviews.
                 Now lets look at some specific columns which are of importance to us. Lets check the average review length.
             </p>
-            <img src="/images/average_review_length.jpg" alt="Image" class="data-image">
+            <img src="images/average_review_length.jpg" alt="Image" class="data-image">
             <p>
                 We can see that people use around 172 characters on average in their reviews. 
                 We'll look at the average playtime across all the games in hours played next.
             </p>
-            <img src="/images/average_playtime_hours.jpg" alt="Image" class="data-image">
+            <img src="images/average_playtime_hours.jpg" alt="Image" class="data-image">
             <p>
                 The average playtime of the reviewed games is around 185 hours. This seems very high. Does the average gamer really spend this much time on a game?
                 Since our review data includes some multiplayer games where players tend to invest much more time, the data can get skewed.
                 Let us look at median playtime of the reviewed games in hours played.
             </p>
-            <img src="/images/median_playtime_hours.jpg" alt="Image" class="data-image">
+            <img src="images/median_playtime_hours.jpg" alt="Image" class="data-image">
             <p>
                 The median comes out to be around 35 hours. This is more representative of how much time gamers usually spend on a game.
                 Lets check if there's any correlation between playing time and review length.
             </p>
-            <img src="/images/playtime_review_length_corr.jpg" alt="Image" class="data-image">
+            <img src="images/playtime_review_length_corr.jpg" alt="Image" class="data-image">
             <p>
                 No significant correlation can be found between the review length and time spent playing that game. 
                 So its not like people who play games for longer write longer reviews.
@@ -163,7 +163,7 @@
                 <p> 
                     First let us look at what the median playtime for each game looks like.
                 </p>
-                <img src="../graphs/playtime_by_game.png" alt="Median Playtime" class="data-image">
+                <img src="graphs/playtime_by_game.png" alt="Median Playtime" class="data-image">
                 <p>
                     As one would expect, multiplayer PVP games like DOTA 2, Rocket League and Counter Strike 2 have the highest playtimes, where as single player and CO-OP titles like INSIDE, and Portal 2 have shorter playtimes.
                     Call of Duty Modern Warfare has both multiplayer and singleplayer options but still has low playtimes, which might indicate that people tend to drop the game after playing the singleplayer campaign and don't indulge too much into multiplayer.
@@ -173,7 +173,7 @@
                 <p> 
                     Let us see how long the average review is for each game.
                 </p>
-                <img src="../graphs/review_length_by_game.png" alt="Review length" class="data-image">
+                <img src="graphs/review_length_by_game.png" alt="Review length" class="data-image">
                 <p>
                     Pillars of Eternity, Returnal and The Witness seem to have the longest reviews while Counter Strike 2 and DOTA 2 have the shortest. 
                     Multiplayers games tend to have shorter reviews compared to the others.
@@ -183,7 +183,7 @@
                 <p> 
                     We explore the distribution of positive and negative reviews for each game.
                 </p>
-                <img src="../graphs/review_sentiment_by_game.png" alt="Review Sentiment" class="data-image">
+                <img src="graphs/review_sentiment_by_game.png" alt="Review Sentiment" class="data-image">
                 <p>
                     It seems that multiplayer games like Rocket League, Team Fortress 2 and Counter Strike 2 have a higher ratio of negative reviews than other single player and CO-OP games. 
                 </p>
@@ -192,7 +192,7 @@
                 <p> 
                     If we want to explore review sentiment of the games further we can see the sorted percentages of positive reviews for the games.
                 </p>
-                <img src="../graphs/percentage_positive_reviews.png" alt="Positive Sentiment" class="data-image">
+                <img src="graphs/percentage_positive_reviews.png" alt="Positive Sentiment" class="data-image">
                 <p>
                     Portal 2, Subnautica and Factorio have the highest percentage of positive reviews wherease Rocket League, Team Fortress 2 and Counter Strike 2 have the least.
                 </p>
@@ -201,7 +201,7 @@
                 <p> 
                     We can visualize the distribution of the length of the reviews and the playtime while writing the review.
                 </p>
-                <img src="../graphs/review_length_vs_playtime.png" alt="Length vs Sentiment" class="data-image">
+                <img src="graphs/review_length_vs_playtime.png" alt="Length vs Sentiment" class="data-image">
                 <p>
                     Its hard to identify any specific relationship between the two. But we can also see that both the reviews length and playtime tend to be on the shorter side.
                     We have too many data points and its hard to see the proper distribution. So we'll take a sample of 1000 reviews and then plot them next.
@@ -211,7 +211,7 @@
                 <p> 
                     We take a sample of 1000 random reviews from our set to get a clearer visual. We also limit our playtime from 0 to 2000 hours and review length from o to 1000 characters as thats where most data points lie.
                 </p>
-                <img src="../graphs/review_length_vs_playtime_sampled_data.png" alt="Length vs Sentiment zoomed" class="data-image">
+                <img src="graphs/review_length_vs_playtime_sampled_data.png" alt="Length vs Sentiment zoomed" class="data-image">
                 <p>
                     We can see most playtimes are under 250 hours and most reviews are also under 200 characters. People tend to write short reviews for most games they play.
                 </p>
@@ -221,7 +221,7 @@
                     The ratio of playtime at review to the total playtime can give us an idea about when people tend to post their reviews. 
                     A small ratio means the reviews were posted very early on when they started playing the game and bigger ratios would mean the reviews were posted closer to the end of their gameplay.
                 </p>
-                <img src="../graphs/distribution_of_playtime_ratio.png" alt="Playtime ratio distribution" class="data-image">
+                <img src="graphs/distribution_of_playtime_ratio.png" alt="Playtime ratio distribution" class="data-image">
                 <p>
                     We can see most highest ratios are more common. So most gamers tend to put their reviews closer to the end of their gameplay. 
                     This means they are more likely to post the reviews when they have completed the game or they dont play it anymore.
@@ -232,7 +232,7 @@
                 <p> 
                     Let us visualize what kind of words are most frequently used in our reviews.
                 </p>
-                <img src="../graphs/word_cloud.png" alt="wordcloud" class="data-image">
+                <img src="graphs/word_cloud.png" alt="wordcloud" class="data-image">
                 <p>
                     Words like "game", "play", "one", "time", "good", "fun", etc. are very commonly used across our reviews. 
                     But we have predominantly positive reviews so words used in those will overshadow words used in negative ones.
@@ -243,7 +243,7 @@
                 <p> 
                     First, let us visualize what kind of words are most frequently used in positive reviews.
                 </p>
-                <img src="../graphs/wordcloud_positive.png" alt="wordcloud positive" class="data-image">
+                <img src="graphs/wordcloud_positive.png" alt="wordcloud positive" class="data-image">
                 <p>
                     Words like "game", "play", "time", "good", "one", "fun" are very common. These are the same ones which appeared in our overall word cloud. 
                     Some more words like "great" and "love" also start appearing more frequently. 
@@ -253,7 +253,7 @@
                 <p> 
                     Next, let us visualize what kind of words are most frequently used in negative reviews.
                 </p>
-                <img src="../graphs/wordcloud_negative.png" alt="wordcloud negative" class="data-image">
+                <img src="graphs/wordcloud_negative.png" alt="wordcloud negative" class="data-image">
                 <p>
                     In negative reviews, words like "game", "play", "time", "one" are still the most common. Words like "great" and "love" become much less frequent.
                 </p>
@@ -262,7 +262,7 @@
                 <p> 
                     The review length for each type of sentiment is analyzed next.
                 </p>
-                <img src="../graphs/review_length_by_sentiment.png" alt="review length by sentiment" class="data-image">
+                <img src="graphs/review_length_by_sentiment.png" alt="review length by sentiment" class="data-image">
                 <p>
                     We limit our review length to upto 1000 characters as we have lot of outliers.
                     Positive Reviews tend to have much lesser median number of charcaters. 
@@ -273,7 +273,7 @@
                 <p> 
                     We now explore the distribution of playtime of two sentiments of reviews.
                 </p>
-                <img src="../graphs/playtime_by_sentiment.png" alt="playtime by sentiment" class="data-image">
+                <img src="graphs/playtime_by_sentiment.png" alt="playtime by sentiment" class="data-image">
                 <p>
                     Both types of reviews have a lot of outliers so we limit our playtime to upto 1000.
                     Positive Reviews tend to have a higher median playtime compared to negative reviews. 
@@ -284,7 +284,7 @@
                 <p> 
                     Finally, let us see the frequency of negative and positive reviews for different ranges of playtime.
                 </p>
-                <img src="../graphs/review_sentiment_by_playtime.png" alt="sentiment by playtime" class="data-image">
+                <img src="graphs/review_sentiment_by_playtime.png" alt="sentiment by playtime" class="data-image">
                 <p>
                     Shorter playtimes have a higher ratio of negative to positive reviews compared to longer reviews. 
                     As evident from the median, people tend to play for shorter times when they leave a negative review.
@@ -301,12 +301,12 @@
             <p>
                 On the cleaned dataset, we will do some more preprocessing and feature engineering. The cleaned data looked like this:
             </p>
-            <img src="/images/cleaned_dataset.jpg" alt="Cleaned Dataset Image" class="data-image">
+            <img src="images/cleaned_dataset.jpg" alt="Cleaned Dataset Image" class="data-image">
             <p>
                 We use the nltk package to get a set of stop words. Stop words are frequently used words (like "and," "the," "is") that generally do not add significant meaning to text analysis. 
                 We will remove these words from our review. The review column now looks like this:
             </p>
-            <img src="/images/featureengineering1.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering1.jpg" alt="image" class="data-image">
             <p>
                 We will define a set of words which are commonly used to express difficulty in the gaming world. These include: <br>
                 'formidable', 'galaxybrain', 'merciless', 'tiresome', 'impossible', 
@@ -327,7 +327,7 @@
                 We will also derive a new feature called review length by taking the length of the review column.
                 The data after these features are added looks like this:
             </p>
-            <img src="/images/featureengineering2.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering2.jpg" alt="image" class="data-image">
             <p>
                 Next, we will define a mapping with games and a list of its genres. Using this we would be creating a new feature for genres. 
                 The genre mapping for each game is the following:
@@ -374,7 +374,7 @@
                 We will initialize everything to 0 first and then for every game whichever genres were mapped, those columns are made 1.
                 The new data looks like has these new features now:
             </p>
-            <img src="/images/featureengineering3.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering3.jpg" alt="image" class="data-image">
             <p>
                 We will extract another feature which classified players as “beginner”, “intermediate” or “experienced”. 
                 For the specific game mentioned in the review, we will classify it as beginner if the author’s playtime is lower than the lower quartile playtime for that game. 
@@ -383,11 +383,11 @@
                 For other cases, they are classified as intermediate. 
                 It looks like this:
             </p>
-            <img src="/images/featureengineering4.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering4.jpg" alt="image" class="data-image">
             <p>
                 We will one hot encode this column. The new data looks like this:
             </p>
-            <img src="/images/featureengineering5.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering5.jpg" alt="image" class="data-image">
             <p>
                 Text reviews (review) contain detailed feedback, but their raw form is difficult for machine learning models to interpret directly. 
                 By extracting a sentiment score, we provide a numerical representation of the review’s polarity, making it easier for the model to process.
@@ -404,11 +404,11 @@
                 We selected the compound score, which is a normalized value between -1 (most negative) and 1 (most positive). 
                 This value is stored as the new column “sentiment_score”. The data looks like this now:
             </p>
-            <img src="/images/featureengineering6.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering6.jpg" alt="image" class="data-image">
             <p>
                 This processsed dataset ready to be implemented into models finally looks like this:
             </p>
-            <img src="/images/featureengineering7.jpg" alt="image" class="data-image">
+            <img src="images/featureengineering7.jpg" alt="image" class="data-image">
             <p>
                 We save this updated dataset to a csv file. 
                 For a detailed walkthrough of our feature engineering process, you can view our 

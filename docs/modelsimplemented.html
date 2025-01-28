@@ -30,7 +30,7 @@
             margin: 5px 0;
         }
     </style>
-<body style="background-image: url('../images/background4.jpg');">
+<body style="background-image: url('images/background4.jpg');">
     <header>
         <h1>Video Game Difficulty and Player Sentiment Analysis</h1>
         <nav>
@@ -59,16 +59,16 @@
                 We will first load in our featured_reviews.csv into a dataframe. We take our “review” feature as X or our input and take “voted_up” as y or our output. 
                 The data initially looks like this:
             </p>
-            <img src="../images/modelimplementation1.jpg" alt="Image" class="data-image">
-            <img src="../images/modelimplementation2.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation1.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation2.jpg" alt="Image" class="data-image">
             <p>
                 BERT model first tokenizes this text data before training. Before tokenizing our data looked like this
             </p>
-            <img src="../images/modelimplementation3.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation3.jpg" alt="Image" class="data-image">
             <p>    
                 The tokenized transformed data looks like this:
             </p>
-            <img src="../images/modelimplementation4.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation4.jpg" alt="Image" class="data-image">
             <p>
                 Our processing involves the following steps:
                 <ul>
@@ -108,7 +108,7 @@
             <p>
                 After training the BERT model, we evaluated it on the test set. Below are the results:
             </p>
-            <img src="../images/modelimplementation5.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation5.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 93%</li>
@@ -150,15 +150,15 @@
                 We make another BERT transfomer model but incorporate two more numerical features along with the review column.
                 We take “review”, “review_length” and “sentiment_score” as our input X and “voted_up” as our output y. Our data looks like this:
             </p>
-            <img src="../images/modelimplementation6.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation6.jpg" alt="Image" class="data-image">
             <p>
                 The numerical columns are normalized by min-max scaling. The data now looks like this:
             <p>
-            <img src="../images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation7.jpg" alt="Image" class="data-image">
             <p>
                 The review column is tokenized in the same manner as the previous and looks like this after transformation again:
             </p>
-            <img src="../images/modelimplementation4.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation4.jpg" alt="Image" class="data-image">
             <p>
                 The processing steps are similar to the previous model: <br>
                 <ul>
@@ -206,7 +206,7 @@
             <p>
                 After training this new BERT model, we evaluated it on the test set. Below are the results:
             </p>
-            <img src="../images/modelimplementation8.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation8.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 93%</li>
@@ -242,11 +242,11 @@
             <p>
                 We will now use a LightGBM classifier model to try to model the same relationship. The data looks like this again:
             </p>
-            <img src="../images/modelimplementation6.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation6.jpg" alt="Image" class="data-image">
             <p>
                 The numerical columns are again normalized and the data looks like this:
             </p>
-            <img src="../images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation7.jpg" alt="Image" class="data-image">
             <p>
                 The review data is transformed for it to work with our classifier model. 
                 The transformation involves converting raw review text into numerical features using TF-IDF (Term Frequency-Inverse Document Frequency). 
@@ -267,7 +267,7 @@
             <p>
                 The transformed data looks like this:
             </p>
-            <img src="../images/modelimplementation9.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation9.jpg" alt="Image" class="data-image">
             <p>
                 We used LightGBM (LGBMClassifier), a gradient boosting framework that is highly efficient for handling large datasets and sparse matrices (like our TF-IDF + numerical features). 
                 The model was initialized with the parameter class_weight="balanced" to handle class imbalance between positive (voted_up=1) and negative (voted_up=0) reviews.
@@ -306,7 +306,7 @@
             <p>
                 The results before hyperparameter tuning and threshold adjustment are the following:
             </p>
-            <img src="../images/modelimplementation10.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation10.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 86%</li>
@@ -334,7 +334,7 @@
             <p>
                 After tuning and threshold adjust, the following were the results:
             </p>
-            <img src="../images/modelimplementation11.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation11.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 91%</li>
@@ -372,11 +372,11 @@
             <p>
                 We try to use an ensemble model for modelling the same relationship. The dataset is the same which looks like this after scaling:
             </p>
-            <img src="../images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation7.jpg" alt="Image" class="data-image">
             <p>
                 The review is transformed again in a similar way as the last LightGBM model and it again looks like this:
             </p>
-            <img src="../images/modelimplementation9.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation9.jpg" alt="Image" class="data-image">
             <p>
                 Ensemble models combine predictions from multiple base models to improve overall performance by leveraging the strengths of each model. 
                 We implemented a stacking ensemble model, which:
@@ -437,7 +437,7 @@
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
             </p>
-            <img src="../images/modelimplementation12.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation12.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 93%</li>
@@ -465,7 +465,7 @@
             <p>
                 After tuning and choosing threshold of 0.7, we got the following results:
             </p>
-            <img src="../images/modelimplementation13.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation13.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 93%</li>
@@ -502,11 +502,11 @@
             <p>
                 We make an ensemble model by bagging the LightGBM Classifier and try to model the same relationship. The dataset is the same which looks like this after scaling:
             </p>
-            <img src="../images/modelimplementation7.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation7.jpg" alt="Image" class="data-image">
             <p>
                 The review is transformed again in a similar way as the last ensemble model and it again looks like this:
             </p>
-            <img src="../images/modelimplementation9.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation9.jpg" alt="Image" class="data-image">
             <p>
                 Bagging (Bootstrap Aggregating) combines multiple instances of a base model to reduce variance and improve stability. 
                 Each base model is trained on a random subset of the data (with replacement), and predictions are aggregated to produce the final result.
@@ -541,7 +541,7 @@
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
             </p>
-            <img src="../images/modelimplementation14.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation14.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 88%</li>
@@ -569,7 +569,7 @@
             <p>
                 After tuning and choosing threshold of 0.4, we got the following results:
             </p>
-            <img src="../images/modelimplementation15.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation15.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 91%</li>
@@ -617,19 +617,19 @@
             <p>
                 Our Input dataset will initially look like this:
             </p>
-            <img src="../images/modelimplementation16.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation16.jpg" alt="Image" class="data-image">
             <p>
                 Both the numerical columns are scaled and they look like this now:
             </p>
-            <img src="../images/modelimplementation17.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation17.jpg" alt="Image" class="data-image">
             <p>
                 The output classes are imbalanced. They look like this:
             </p>
-            <img src="../images/modelimplementation18.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation18.jpg" alt="Image" class="data-image">
             <p>
                 We use both undersampling and oversampling and the data now looks like this:
             </p>
-            <img src="../images/modelimplementation19.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation19.jpg" alt="Image" class="data-image">
             <p>
                 The LightGBMClassifier was used for training, leveraging its ability to handle class imbalance with the class_weight='balanced' parameter. 
                 Hyperparameter tuning was conducted using GridSearchCV, with 3 fold cross validation, to optimize the following parameters with respect to F1 score:
@@ -646,7 +646,7 @@
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
             </p>
-            <img src="../images/modelimplementation20.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation20.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 76%</li>
@@ -674,7 +674,7 @@
             <p>
                 After tuning and choosing threshold of 0.7, we got the following results:
             </p>
-            <img src="../images/modelimplementation21.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation21.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 87%</li>
@@ -718,19 +718,19 @@
             <p>
                 The input dataset looks like this again:
             </p>
-            <img src="../images/modelimplementation16.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation16.jpg" alt="Image" class="data-image">
             <p>
                 After being normalized it looks like this:
             </p>
-            <img src="../images/modelimplementation17.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation17.jpg" alt="Image" class="data-image">
             <p>
                 The output classes are imbalanced. They look like this:
             </p>
-            <img src="../images/modelimplementation18.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation18.jpg" alt="Image" class="data-image">
             <p>
                 We use both undersampling and oversampling and the data now looks like this:
             </p>
-            <img src="../images/modelimplementation19.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation19.jpg" alt="Image" class="data-image">
             <p>
                 An XGBoostClassifier was used for training. The following default parameters were applied:
                 <ul>
@@ -758,7 +758,7 @@
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
             </p>
-            <img src="../images/modelimplementation22.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation22.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 67%</li>
@@ -786,7 +786,7 @@
             <p>
                 After tuning and choosing threshold of 0.8, we got the following results:
             </p>
-            <img src="../images/modelimplementation23.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation23.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 86%</li>
@@ -832,19 +832,19 @@
             <p>
                 The input dataset looks like this again:
             </p>
-            <img src="../images/modelimplementation16.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation16.jpg" alt="Image" class="data-image">
             <p>
                 After being normalized it looks like this:
             </p>
-            <img src="../images/modelimplementation17.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation17.jpg" alt="Image" class="data-image">
             <p>
                 The output classes are imbalanced. They look like this:
             </p>
-            <img src="../images/modelimplementation18.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation18.jpg" alt="Image" class="data-image">
             <p>
                 We use both undersampling and oversampling and the data now looks like this:
             </p>
-            <img src="../images/modelimplementation19.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation19.jpg" alt="Image" class="data-image">
             <p>
                 Our base models were the following:
                 <ul>
@@ -880,7 +880,7 @@
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
             </p>
-            <img src="../images/modelimplementation24.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation24.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 75%</li>
@@ -908,7 +908,7 @@
             <p>
                 After tuning and choosing threshold of 0.7, we got the following results:
             </p>
-            <img src="../images/modelimplementation25.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation25.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 85%</li>
@@ -952,19 +952,19 @@
             <p>
                 The input dataset looks like this again:
             </p>
-            <img src="../images/modelimplementation16.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation16.jpg" alt="Image" class="data-image">
             <p>
                 After being normalized it looks like this:
             </p>
-            <img src="../images/modelimplementation17.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation17.jpg" alt="Image" class="data-image">
             <p>
                 The output classes are imbalanced. They look like this:
             </p>
-            <img src="../images/modelimplementation18.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation18.jpg" alt="Image" class="data-image">
             <p>
                 We use both undersampling and oversampling and the data now looks like this:
             </p>
-            <img src="../images/modelimplementation19.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation19.jpg" alt="Image" class="data-image">
             <p>
                 Our base models were the following:
                 <ul>
@@ -999,7 +999,7 @@
             <p>
                 Before hyperparameter tuning and threshold adjustment we got the following results:
             </p>
-            <img src="../images/modelimplementation26.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation26.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 75%</li>
@@ -1027,7 +1027,7 @@
             <p>
                 After tuning and choosing threshold of 0.7, we got the following results:
             </p>
-            <img src="../images/modelimplementation27.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation27.jpg" alt="Image" class="data-image">
             <p>
                 <ul>
                     <li>Accuracy: 88%</li>
@@ -1071,21 +1071,21 @@
             <p>
                 Our input data looks like this:
             </p>
-            <img src="../images/modelimplementation28.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation28.jpg" alt="Image" class="data-image">
             <p>
                 The output class is imabalanced and the counts look like this:
             </p>
-            <img src="../images/modelimplementation29.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation29.jpg" alt="Image" class="data-image">
             <p>
                 We use SMOTE oversampling. The new counts look like this:
             </p>
-            <img src="../images/modelimplementation30.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation30.jpg" alt="Image" class="data-image">
             <p>
                 We first implemented a Decision tree model with and then a Random Forest model both with the parameter class_weight="balanced" and other default parameters.
                 Next we implement a Logistic Regression Model with max_iter=1000. 
                 All 3 models gave identical results which look like this:
             </p>
-            <img src="../images/modelimplementation31.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation31.jpg" alt="Image" class="data-image">
             <p>
                 Hyperparameter tuning was done for all 3 of them:
                 <ul>
@@ -1118,7 +1118,7 @@
             <p>
                 Even after tuning, all 3 models yield almost the same results again, same as the ones before. These look like this:
             </p>
-            <img src="../images/modelimplementation32.jpg" alt="Image" class="data-image">
+            <img src="images/modelimplementation32.jpg" alt="Image" class="data-image">
             <p>
                 Since it produces nearly identical results with all three models, even after tuning, we can conclude that there isn't strong enough evidence in the data to model the mentioned relationship
             </p>

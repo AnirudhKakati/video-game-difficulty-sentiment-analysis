@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
 </head>
-<body style="background-image: url('../images/background5.jpg');">
+<body style="background-image: url('images/background5.jpg');">
     <header>
         <h1>Video Game Difficulty and Player Sentiment Analysis</h1>
         <nav>
@@ -42,7 +42,7 @@
                 For every genre, we will take calculate the proportion of reviews mentioning difficulty. 
                 We do this by taking the ratio of the number of reviews of that genre with mentions_difficulty flag as 1, to the total number of reviews of that genre.
             </p>
-            <img src="../images/analysis1.jpg" alt="Image" class="data-image">
+            <img src="images/analysis1.jpg" alt="Image" class="data-image">
             <p>
                 For "Co_op" and "Metroidvania" genres more than 18% of the reviews use atleast one word related to difficulty. 
                 "multiplayer" and "competitive" genres have the least proportion of reviews having words related to difficulty, with around 8% and 7% respectively.
@@ -54,7 +54,7 @@
             <p>
                 We will calculate the average sentiment score of reviews for every genre and plot a scatter plot.
             </p>
-            <img src="../images/analysis2.jpg" alt="Image" class="data-image">
+            <img src="images/analysis2.jpg" alt="Image" class="data-image">
             <p>
                 "competitve" and "multiplayer" genres have the lowest average sentiment scores for the reviews, with 0.18 and 0.21 respectively. 
                 "crpg" and "fantasy" have the highest with 0.47 and 0.46 respectively.
@@ -66,17 +66,17 @@
             <p>
                 We will look at the distribution of sentiment scores for the 3 types of player experience levels that we defined: beginner, intermediate and experienced, using a boxplot.
             </p>
-            <img src="../images/analysis3.jpg" alt="Image" class="data-image">
+            <img src="images/analysis3.jpg" alt="Image" class="data-image">
             <p>
                All experience levels have the same median sentiment score, with slightly different upper quartile scores.
                 We will perform ANOVA test to determine if there's statistically significant difference in these scores.
             </p>
-            <img src="../images/analysis4.jpg" alt="Image" class="data-image">
+            <img src="images/analysis4.jpg" alt="Image" class="data-image">
             <p>
                 The test suggest there is a significant enough difference in scores between the experience levels.
                 We can do a Tukey's test to analyse the groups further.
             </p>
-            <img src="../images/analysis5.jpg" alt="Image" class="data-image">
+            <img src="images/analysis5.jpg" alt="Image" class="data-image">
             <p>
                 From this test we can see that there is enough difference in sentiment scores between beginner and experienced players, and beginner and intermediate players. 
                 But there isn't statistically enough difference between the scores of intermediate and experienced players.
@@ -89,7 +89,7 @@
                 We calculate the Pearson Correlation between the author_num_games_owned and the sentiment_scores. 
                 We also make a scatter plot with a regression line to visualize this.
             </p>
-            <img src="../images/analysis6.jpg" alt="Image" class="data-image">
+            <img src="images/analysis6.jpg" alt="Image" class="data-image">
             <p>
                 It is clear from the analysis that there is virtually no correlation between the number of games authors own and the sentiment scores of their reviews.
             </p>
@@ -100,7 +100,7 @@
             <p>
                 We take a histogram of the distribution of sentiment scores for both positive and negative reviews which mention difficulty.
             </p>
-            <img src="../images/analysis7.jpg" alt="Image" class="data-image">
+            <img src="images/analysis7.jpg" alt="Image" class="data-image">
             <p>
                 We can see that majority of the reviews mentioning difficulty tend to be positive, with sentiment scores on the higher side.
             </p>
@@ -112,7 +112,7 @@
                 We make 5 bins of playtime: Less than 5 hours, 5-20 hours, 20-50 hours, 50-100 hours and 100+ hours. 
                 For each of these bins we plot the proportion of reviews mentioning difficulty that fall into this bin.
             </p>
-            <img src="../images/analysis8.jpg" alt="Image" class="data-image">
+            <img src="images/analysis8.jpg" alt="Image" class="data-image">
             <p>
                 Around 25% of the reviews mentioning review tend to have less than 5 hours of total playtime. 
                 The overall trend is that with increasing playtime the proportion of reviews mentioning difficulty tends to decrease.
@@ -124,7 +124,7 @@
             <p>
                 We will make a word cloud of the most frequent words in negative reviews which mention difficulty.
             </p>
-            <img src="../images/analysis9.jpg" alt="Image" class="data-image">
+            <img src="images/analysis9.jpg" alt="Image" class="data-image">
             <p>
                 Similar to our previous world clouds, words like "game", "play", "time" and "like" are common here.
             </p>
